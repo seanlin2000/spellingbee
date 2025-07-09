@@ -62,20 +62,13 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 hiddenInput.addEventListener('input', e => {
-  currentWord = hiddenInput.value.toUpperCase();
+  setCurrentWord(hiddenInput.value.toUpperCase());
   updateCurrentWordDisplay();
 });
 
 hiddenInput.addEventListener('keydown', e => {
   if (e.key === 'Enter') {
-    // Submit logic now handled by button.js, but keep for keyboard
-    const word = getCurrentWord();
-    if (word) {
-      alert('You entered: ' + word);
-      setCurrentWord('');
-      hiddenInput.value = '';
-      updateCurrentWordDisplay();
-    }
+    submitWord({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
     e.preventDefault();
   } else if (e.key.length === 1 && !/^[a-zA-Z]$/.test(e.key)) {
     e.preventDefault();

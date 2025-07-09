@@ -4,7 +4,6 @@
 export function submitWord({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput }) {
   const word = getCurrentWord();
   if (word) {
-    alert('You entered: ' + word);
     setCurrentWord('');
     hiddenInput.value = '';
     updateCurrentWordDisplay();
