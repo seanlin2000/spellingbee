@@ -4,11 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sean's Spelling Bee</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/css/navbar.css">
+  <link rel="stylesheet" href="/static/css/buttons.css">
+  <link rel="stylesheet" href="/static/css/honeycomb.css">
+  <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
   <header class="header">
-    <div class="logo">🐝 Spelling Bee</div>
+    <div class="logo-area">
+      <img src="/static/favicons/bee.ico" alt="Bee Logo" class="bee-logo" />
+      <div class="logo-text">
+        <span class="logo-main">FreeBee</span>
+        <span class="logo-date"> <!-- Date will be filled by JS --> </span>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <button class="nav-btn hint-btn" title="Hint">
+        <img src="/static/icons/hint.svg" alt="Hint" />
+      </button>
+      <button class="nav-btn howto-btn" title="How to Play">
+        <img src="/static/icons/info.svg" alt="How to Play" />
+      </button>
+      <button class="nav-btn rankings-btn" title="Rankings">
+        <img src="/static/icons/ranking.svg" alt="Rankings" />
+      </button>
+      <button class="nav-btn community-btn" title="Community">
+        <img src="/static/icons/community.svg" alt="Community" />
+      </button>
+    </nav>
   </header>
   <main>
     <section class="game-container">
@@ -19,13 +42,23 @@
       <input class="word-input" type="text" style="opacity:0;" autocomplete="off" />
       <div class="game-buttons">
         <button class="delete-btn">Delete</button>
-        <button class="shuffle-btn">Shuffle</button>
+        <button class="shuffle-btn" title="Shuffle">
+          <img src="/static/favicons/shuffle.ico" alt="Shuffle" />
+        </button>
         <button class="submit-btn">Enter</button>
       </div>
     </section>
   </main>
   <script type="module" src="/static/app.js"></script>
   <script type="module" src="/static/honeycomb.js"></script>
-  <!-- <script type="module" src="/static/button.js"></script> -->
+  <script>
+    // Set today's date in the header
+    const dateElem = document.querySelector('.logo-date');
+    if (dateElem) {
+      const today = new Date();
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      dateElem.textContent = today.toLocaleDateString(undefined, options);
+    }
+  </script>
 </body>
 </html>
