@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sean's Spelling Bee</title>
+  <title>FreeBee Spelling Bee</title>
   <link rel="stylesheet" href="/static/css/navbar.css">
   <link rel="stylesheet" href="/static/css/buttons.css">
   <link rel="stylesheet" href="/static/css/honeycomb.css">
@@ -20,10 +20,10 @@
     </div>
     
     <div class="topnav">
-      <a class="active" href="#home">Home</a>
-      <a href="#news">News</a>
-      <a href="#contact">Contact</a>
-      <a href="#about">About</a>
+      <a href="Rules">Rules</a>
+      <a href="https://www.nytimes.com/2025/07/09/crosswords/spelling-bee-forum.html">Hints</a>
+      <a href="#rankings">Rankings</a>
+      <a href="#stats">Stats</a>
     </div> 
 
   </header>
@@ -43,16 +43,6 @@
       </div>
     </section>
   </main>
-  <script type="module" src="/static/app.js"></script>
-  <script type="module" src="/static/honeycomb.js"></script>
-  <script>
-    // Set today's date in the header
-    const dateElem = document.querySelector('.logo-date');
-    if (dateElem) {
-      const today = new Date();
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
-      dateElem.textContent = today.toLocaleDateString(undefined, options);
-    }
-  </script>
+  <script type="module" src="/static/js/app.js"></script>
 </body>
 </html>

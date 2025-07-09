@@ -1,6 +1,13 @@
 // Game logic for Spelling Bee
 import { positionHexagons, fetchBeeLetters, renderHoneycomb, addHoneycombClickListener } from "./honeycomb.js";
 import { submitWord, deleteChar, handleShuffleClick } from "./button.js";
+import {
+  setHeaderDate,
+  updateHintsLink,
+  setupRulesPopup,
+  injectPopupAnimation,
+  setupRankingsPopup
+} from "./header.js";
 
 let currentWord = '';
 let beeData = null; // Store the current bee letters
@@ -88,4 +95,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderHoneycomb(beeData.center_letter, beeData.outer_letters);
   }
   positionHexagons();
+});
+
+// Call these on DOMContentLoaded
+window.addEventListener('DOMContentLoaded', () => {
+  setHeaderDate();
+  updateHintsLink();
+  setupRulesPopup();
+  injectPopupAnimation();
+  setupRankingsPopup(beeDataRef); // Pass beeDataRef for rankings
 });
