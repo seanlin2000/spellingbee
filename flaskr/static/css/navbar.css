@@ -1,0 +1,105 @@
+/* Header (navbar) styles extracted from style.css */
+.header {
+  background: #FFCE1C;
+  padding: 0.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 2rem;
+  font-weight: bold;
+  border-bottom: 2px solid #FFCE1C;
+  height: 48px;
+}
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.bee-logo {
+  width: 48px;
+  height: 48px;
+  margin-right: 0.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.10));
+}
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.logo-main {
+  font-family: 'Montserrat', 'Benton Sans', Arial, sans-serif;
+  font-size: 2.1rem;
+  color: #222;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+.logo-date {
+  font-size: 1.2rem;
+  color: #888;
+  font-weight: 400;
+  margin-top: -0.2rem;
+  margin-left: 2px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #FFCE1C;
+  height: 68px;
+  display: flex;
+  align-items: center;
+}
+
+.topnav a {
+  float: left;
+  color: #333;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.topnav a:hover {
+  background-color: #ECBD0F;
+  color: #333;
+}
+
+@media (max-width: 700px) {
+  .header {
+    flex-direction: column;
+    height: auto;
+    padding: 0.5rem 1rem;
+    align-items: flex-start;
+  }
+  .logo-area {
+    margin-bottom: 0.5rem;
+  }
+  .topnav {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    background: #FFCE1C;
+    padding: 0;
+  }
+  .topnav a {
+    width: 100%;
+    padding: 12px 0.5rem;
+    justify-content: flex-start;
+    font-size: 1rem;
+    border-bottom: 1px solid #ECBD0F;
+  }
+  .bee-logo {
+    width: 36px;
+    height: 36px;
+  }
+  .logo-main {
+    font-size: 1.3rem;
+  }
+  .logo-date {
+    font-size: 0.9rem;
+  }
+}

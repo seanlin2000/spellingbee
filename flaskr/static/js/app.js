@@ -1,11 +1,22 @@
 // Game logic for Spelling Bee
-import { positionHexagons, fetchBeeLetters, renderHoneycomb } from "./honeycomb.js";
-import { initButtonHandlers } from "./button.js";
+import { positionHexagons, fetchBeeLetters, renderHoneycomb, addHoneycombClickListener } from "./honeycomb.js";
+import { submitWord, deleteChar, handleShuffleClick } from "./button.js";
+import {
+  setHeaderDate,
+  updateHintsLink,
+  setupRulesPopup,
+  injectPopupAnimation,
+  setupRankingsPopup
+} from "./header.js";
 
 let currentWord = '';
 let beeData = null; // Store the current bee letters
 const currentWordDiv = document.querySelector('.current-word');
 const hiddenInput = document.querySelector('.word-input');
+const deleteBtn = document.querySelector('.delete-btn');
+const submitBtn = document.querySelector('.submit-btn');
+const shuffleBtn = document.querySelector('.shuffle-btn');
+const honeycomb = document.querySelector('.honeycomb');
 
 function updateCurrentWordDisplay() {
   // Get all valid letters from honeycomb (center + outer)
@@ -38,47 +49,33 @@ const beeDataRef = { value: null };
 window.addEventListener('DOMContentLoaded', () => {
   hiddenInput.focus();
 
-  // Move button event listeners to button.js
-  initButtonHandlers({
-    getCurrentWord,
-    setCurrentWord,
-    updateCurrentWordDisplay,
-    hiddenInput,
-    beeData: beeDataRef,
-    renderHoneycomb
+  submitBtn.addEventListener('click', () => {
+    submitWord({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
+  });
+  deleteBtn.addEventListener('click', () => {
+    deleteChar({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
+  });
+  shuffleBtn.addEventListener('click', () => {
+    handleShuffleClick({ beeData: beeDataRef, renderHoneycomb, honeycomb });
   });
 
   const gameContainer = document.querySelector('.game-container');
-  const honeycomb = document.querySelector('.honeycomb');
 
   gameContainer.addEventListener('click', () => hiddenInput.focus());
 
-  honeycomb.addEventListener('click', e => {
-    const hex = e.target.closest('.hex');
-    if (hex && hex.dataset.letter) {
-      currentWord += hex.dataset.letter;
-      hiddenInput.value = currentWord;
-      updateCurrentWordDisplay();
-      hiddenInput.focus();
-    }
-  });
+  // Move honeycomb click listener to honeycomb.js
+  // addHoneycombClickListener will be called here
+  addHoneycombClickListener({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
 });
 
 hiddenInput.addEventListener('input', e => {
-  currentWord = hiddenInput.value.toUpperCase();
+  setCurrentWord(hiddenInput.value.toUpperCase());
   updateCurrentWordDisplay();
 });
 
 hiddenInput.addEventListener('keydown', e => {
   if (e.key === 'Enter') {
-    // Submit logic now handled by button.js, but keep for keyboard
-    const word = getCurrentWord();
-    if (word) {
-      alert('You entered: ' + word);
-      setCurrentWord('');
-      hiddenInput.value = '';
-      updateCurrentWordDisplay();
-    }
+    submitWord({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
     e.preventDefault();
   } else if (e.key.length === 1 && !/^[a-zA-Z]$/.test(e.key)) {
     e.preventDefault();
@@ -98,4 +95,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderHoneycomb(beeData.center_letter, beeData.outer_letters);
   }
   positionHexagons();
+});
+
+// Call these on DOMContentLoaded
+window.addEventListener('DOMContentLoaded', () => {
+  setHeaderDate();
+  updateHintsLink();
+  setupRulesPopup();
+  injectPopupAnimation();
+  setupRankingsPopup(beeDataRef); // Pass beeDataRef for rankings
 });

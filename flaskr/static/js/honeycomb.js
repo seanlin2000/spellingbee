@@ -55,3 +55,18 @@ export function renderHoneycomb(center, outers) {
   }
   positionHexagons();
 }
+
+// Handles clicks on honeycomb hexes to add letters to the current word
+export function addHoneycombClickListener({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput }) {
+  const honeycomb = document.querySelector('.honeycomb');
+  honeycomb.addEventListener('click', e => {
+    const hex = e.target.closest('.hex');
+    if (hex && hex.dataset.letter) {
+      const current = getCurrentWord();
+      setCurrentWord(current + hex.dataset.letter);
+      hiddenInput.value = getCurrentWord();
+      updateCurrentWordDisplay();
+      hiddenInput.focus();
+    }
+  });
+}

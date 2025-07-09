@@ -3,12 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sean's Spelling Bee</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <title>FreeBee Spelling Bee</title>
+  <link rel="stylesheet" href="/static/css/navbar.css">
+  <link rel="stylesheet" href="/static/css/buttons.css">
+  <link rel="stylesheet" href="/static/css/honeycomb.css">
+  <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
   <header class="header">
-    <div class="logo">🐝 Spelling Bee</div>
+    <div class="logo-area">
+      <img src="/static/favicons/bee.ico" alt="Bee Logo" class="bee-logo" />
+      <div class="logo-text">
+        <span class="logo-main">FreeBee</span>
+        <span class="logo-date"> <!-- Date will be filled by JS --> </span>
+      </div>
+    </div>
+    
+    <div class="topnav">
+      <a href="Rules">Rules</a>
+      <a href="https://www.nytimes.com/2025/07/09/crosswords/spelling-bee-forum.html">Hints</a>
+      <a href="#rankings">Rankings</a>
+      <a href="#stats">Stats</a>
+    </div> 
+
   </header>
   <main>
     <section class="game-container">
@@ -19,13 +36,13 @@
       <input class="word-input" type="text" style="opacity:0;" autocomplete="off" />
       <div class="game-buttons">
         <button class="delete-btn">Delete</button>
-        <button class="shuffle-btn">Shuffle</button>
+        <button class="shuffle-btn" title="Shuffle">
+          <img src="/static/favicons/shuffle.ico" alt="Shuffle" />
+        </button>
         <button class="submit-btn">Enter</button>
       </div>
     </section>
   </main>
-  <script type="module" src="/static/app.js"></script>
-  <script type="module" src="/static/honeycomb.js"></script>
-  <!-- <script type="module" src="/static/button.js"></script> -->
+  <script type="module" src="/static/js/app.js"></script>
 </body>
 </html>
