@@ -28,7 +28,14 @@
   font-weight: 700;
   color: #333;
   user-select: none;
-  transition: left 0.2s, top 0.2s;
-}
+  transition: left 0.2s, top 0.2s, background 0.15s, box-shadow 0.15s;
 .hex.center { background: #FFCE1C; }
+}
+.hex.center:active {
+  background: #e6b800 !important;
+}
+
 .hex:not(.center) { background: #E7E7E7; }
+.hex:not(center):active {
+  background: #d9d9d9 !important;
+}

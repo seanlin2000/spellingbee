@@ -34,8 +34,14 @@ body {
 }
 
 .word-input {
-  opacity: 0;
-  pointer-events: none;
+  opacity: 0.01;
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: auto;
+  z-index: 1;
 }
 
 @media (max-width: 500px) {
