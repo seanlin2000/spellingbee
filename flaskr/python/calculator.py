@@ -1,6 +1,6 @@
 import math
 
-from scraper import fetch_spelling_bee
+from flaskr.python.scraper import fetch_spelling_bee
 
 RANKINGS = {
     "Beginner": 0, 
@@ -11,7 +11,8 @@ RANKINGS = {
      "Nice": 25, 
      "Great": 40, 
      "Amazing": 50, 
-     "Genius": 70
+     "Genius": 70,
+     "Queen Bee": 100
      }
 
 
@@ -31,6 +32,14 @@ def compute_max_score(answers, pangrams):
             max_score += 7
         max_score += len(answer)
     return max_score
+
+def compute_rankings(max_score):
+    ranking_scores = {}
+    for ranking in RANKINGS:
+        cutoff = RANKINGS[ranking]
+        cutoff_score = nyt_round((cutoff / 100) * max_score)
+        ranking_scores[ranking] = cutoff_score
+    return ranking_scores
 
 if __name__ == '__main__':
     info = fetch_spelling_bee()
