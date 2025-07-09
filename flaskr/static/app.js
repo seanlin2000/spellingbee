@@ -8,7 +8,24 @@ const currentWordDiv = document.querySelector('.current-word');
 const hiddenInput = document.querySelector('.word-input');
 
 function updateCurrentWordDisplay() {
-  currentWordDiv.innerHTML = `${currentWord}<span class="blinking-caret"></span>`;
+  // Get all valid letters from honeycomb (center + outer)
+  let validLetters = [];
+  if (beeDataRef.value) {
+    validLetters = [
+      beeDataRef.value.center_letter,
+      ...beeDataRef.value.outer_letters
+    ].map(l => l.toUpperCase());
+  }
+  // Build HTML with gray for invalid letters
+  let html = '';
+  for (const ch of currentWord) {
+    if (validLetters.length && !validLetters.includes(ch)) {
+      html += `<span style="color:#bbb">${ch}</span>`;
+    } else {
+      html += `<span style="color:#111">${ch}</span>`;
+    }
+  }
+  currentWordDiv.innerHTML = `${html}<span class="blinking-caret"></span>`;
 }
 
 // Provide getter/setter for currentWord for modularity
