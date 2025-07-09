@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sean's Spelling Bee</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">🐝 Spelling Bee</div>
+  </header>
+  <main>
+    <section class="game-container">
+      <div class="current-word" tabindex="0"></div>
+      <div class="honeycomb">
+        <!-- Honeycomb letters will be rendered here by app.js -->
+      </div>
+      <input class="word-input" type="text" style="opacity:0;" autocomplete="off" />
+      <div class="game-buttons">
+        <button class="delete-btn">Delete</button>
+        <button class="shuffle-btn">Shuffle</button>
+        <button class="submit-btn">Enter</button>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="/static/app.js"></script>
+  <script type="module" src="/static/honeycomb.js"></script>
+  <!-- <script type="module" src="/static/button.js"></script> -->
+</body>
+</html>

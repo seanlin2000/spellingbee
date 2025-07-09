@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #FFFFFF;
+  color: #333;
+}
+.header {
+  background: #fff200;
+  padding: 1rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.logo {
+  display: inline-block;
+  vertical-align: middle;
+}
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+.current-word {
+  min-height: 2.5rem;
+  font-size: 2rem;
+  font-family: 'Montserrat', 'Benton Sans', Arial, sans-serif;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0em;
+  outline: none;
+}
+.blinking-caret {
+  display: inline-block;
+  height: 2rem;
+  vertical-align: middle;
+  border-right: 2px solid #F7DA21;
+  animation: blink-caret 1s steps(1) infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink-caret {
+  0%, 100% { border-color: #F7DA21; }
+  50% { border-color: transparent; }
+}
+.honeycomb {
+  position: relative;
+  width: 90vw;
+  max-width: 400px;
+  aspect-ratio: 1/1;
+}
+.hex {
+  position: absolute;
+  width: 30%;
+  aspect-ratio: 1/1;
+  background: #fff200;
+  clip-path: polygon(
+    25% 6%, 75% 6%,
+    100% 50%, 75% 94%,
+    25% 94%, 0% 50%
+  );
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat', 'Benton Sans', Arial, sans-serif;
+  font-size: 1.875em;
+  font-weight: 700;
+  color: #333;
+  user-select: none;
+  transition: left 0.2s, top 0.2s;
+}
+.hex.center { background: #F7DA21; }
+.hex:not(.center) { background: #E7E7E7; }
+.word-input {
+  opacity: 0;
+  pointer-events: none;
+}
+.game-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  width: 100%;
+}
+.game-buttons button {
+  background: #ffd600;
+  color: #333;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s;
+  flex: 1 1 0;
+  max-width: 140px;
+}
+.game-buttons button:hover {
+  background: #fff200;
+}
+@media (max-width: 500px) {
+  .honeycomb { width: 98vw; max-width: 260px; }
+  .hex { font-size: 4vw; }
+  .word-input { width: 120px; }
+}

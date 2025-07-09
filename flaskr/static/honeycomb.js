@@ -1,0 +1,57 @@
+export function positionHexagons() {
+  const honeycomb = document.querySelector('.honeycomb');
+  const hexes = honeycomb.querySelectorAll('.hex');
+  const w = honeycomb.offsetWidth;
+  const h = honeycomb.offsetHeight;
+  // Calculate center
+  const cx = w / 2;
+  const cy = h / 2;
+  // Distance from center to each hex center
+  const r = w * 0.28; // radius for hex centers
+
+  // Angles for 6 outer hexes
+  const angles = [270, 330, 30, 90, 150, 210];
+  // Set center hex
+  hexes[0].style.left = (cx - hexes[0].offsetWidth / 2) + 'px';
+  hexes[0].style.top = (cy - hexes[0].offsetHeight / 2) + 'px';
+  // Set outer hexes
+  for (let i = 1; i < 7; i++) {
+    const angleRad = angles[i - 1] * Math.PI / 180;
+    const x = cx + r * Math.cos(angleRad) - hexes[i].offsetWidth / 2;
+    const y = cy + r * Math.sin(angleRad) - hexes[i].offsetHeight / 2;
+    hexes[i].style.left = x + 'px';
+    hexes[i].style.top = y + 'px';
+  }
+}
+export async function fetchBeeLetters() {
+  const url = '/bee';
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error('Failed to fetch bee letters');
+  return await resp.json();
+}
+export function renderHoneycomb(center, outers) {
+  const honeycomb = document.querySelector('.honeycomb');
+  honeycomb.innerHTML = '';
+  // Center
+  const centerDiv = document.createElement('div');
+  centerDiv.className = 'hex center';
+  centerDiv.dataset.letter = center;
+  const centerSpan = document.createElement('span');
+  centerSpan.className = 'hex-letter';
+  centerSpan.textContent = center;
+  centerDiv.appendChild(centerSpan);
+  honeycomb.appendChild(centerDiv);
+  // Outer positions: top, top-right, bottom-right, bottom, bottom-left, top-left
+  const positions = ['top', 'top-right', 'bottom-right', 'bottom', 'bottom-left', 'top-left'];
+  for (let i = 0; i < 6; i++) {
+    const div = document.createElement('div');
+    div.className = 'hex ' + positions[i];
+    div.dataset.letter = outers[i] || '';
+    const span = document.createElement('span');
+    span.className = 'hex-letter';
+    span.textContent = outers[i] || '';
+    div.appendChild(span);
+    honeycomb.appendChild(div);
+  }
+  positionHexagons();
+}
