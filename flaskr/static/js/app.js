@@ -5,6 +5,7 @@ import {
   setHeaderDate, setupHamburgerMenu
 } from "./header.js";
 import { foundWords, updateFoundWordsDisplay, showFeedbackBubble } from "./submissions.js";
+import { computeScore, computeRankings, findRank, computePointsToNextRank } from "./scoring.js";
 
 let currentWord = '';
 let beeData = null; // Store the current bee letters
@@ -70,20 +71,15 @@ window.addEventListener('DOMContentLoaded', async () => {
     beeDataRef.value = data;
     renderHoneycomb(data.center_letter, data.outer_letters);
   } catch (e) {
+    console.error('Error fetching bee letters:', e); // Log the error for debugging
     beeData = { center_letter: 'A', outer_letters: ['B','C','D','E','F','G'] };
     beeDataRef.value = beeData;
     renderHoneycomb(beeData.center_letter, beeData.outer_letters);
   }
   positionHexagons();
 
-  // After loading beeDataRef, render the progress bar
-  const ranks = window.beeDataRef?.value?.rankings_order || [
-    'Beginner', 'Novice', 'Intermediate', 'Advanced', 'Expert', 'Master', 'Genius', 'Queen Bee'
-  ];
-  const maxScore = window.beeDataRef?.value?.max_score || 253;
-  const currentScore = 0; // Replace with actual score logic
-  const currentRankIdx = 0; // Replace with actual rank index logic
-  renderProgressBar({ currentScore, maxScore, ranks, currentRankIdx });
+  // After loading beeDataRef, render the progress bar and update rank UI
+  updateProgressUI();
 });
 
 hiddenInput.addEventListener('input', e => {
@@ -109,6 +105,34 @@ function isValidAnswer(word) {
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+function updateProgressUI() {
+  const ranks = window.beeDataRef?.value?.rankings_order || [
+    'Beginner', 'Good Start', 'Moving Up', 'Good', 'Solid', 'Nice', 'Great', 'Amazing', 'Genius', 'Queen Bee'
+  ];
+  const answers = window.beeDataRef?.value?.answers || [];
+  const pangrams = window.beeDataRef?.value?.pangrams || [];
+  const maxScore = computeScore(answers, pangrams);
+  const score = computeScore(foundWords, pangrams);
+  const { currRank, nextRank } = findRank(foundWords, answers, pangrams);
+  const pointsToNext = computePointsToNextRank(foundWords, answers, pangrams);
+
+  // Update level-label UI
+  const rankTitle = document.getElementById('rank-title');
+  const rankSubtitle = document.getElementById('rank-subtitle');
+  if (rankTitle) rankTitle.textContent = currRank || ranks[0];
+  if (rankSubtitle) {
+    if (nextRank) {
+      rankSubtitle.innerHTML = `<strong>${pointsToNext}</strong> to ${nextRank}`;
+    } else {
+      rankSubtitle.innerHTML = `<strong>Max</strong> rank!`;
+    }
+  }
+
+  // Progress bar logic
+  const currentRankIdx = ranks.indexOf(currRank || ranks[0]);
+  renderProgressBar({ currentScore: score, maxScore, ranks, currentRankIdx });
 }
 
 function handleWordSubmission() {
@@ -137,6 +161,7 @@ function handleWordSubmission() {
   setCurrentWord('');
   updateCurrentWordDisplay();
   hiddenInput.value = '';
+  updateProgressUI(); // <-- update progress/rank after word submission
 }
 
 submitBtn.addEventListener('click', () => {

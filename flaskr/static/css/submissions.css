@@ -68,7 +68,7 @@
   margin-bottom: 0.1em;
 }
 .level-label .subtitle {
-  font-size: 1.08em;
+  font-size: 0.97em; /* smaller font for better fit */
   color: #6c6c7a;
   margin-top: 0.1em;
   font-weight: 600;
