@@ -132,13 +132,15 @@ function handleWordSubmission() {
     return;
   }
   word = capitalizeFirstLetter(word);
-  // Get previous rank before adding word
+  // Get previous rank before adding word (use score, not foundWords)
   const ranks = window.beeDataRef?.value?.rankings_order || [
     'Beginner', 'Good Start', 'Moving Up', 'Good', 'Solid', 'Nice', 'Great', 'Amazing', 'Genius', 'Queen Bee'
   ];
   const answers = window.beeDataRef?.value?.answers || [];
   const pangrams = window.beeDataRef?.value?.pangrams || [];
-  const { currRank: prevRank } = findRank(foundWords, answers, pangrams);
+  // Calculate previous score (before adding this word)
+  const prevScore = currentScore;
+  const { currRank: prevRank } = findRank(prevScore, answers, pangrams);
 
   // Compute points for this word
   const points = computeScore([word.toLowerCase()], pangrams);
@@ -166,7 +168,7 @@ function handleWordSubmission() {
   const didRankUp = updateProgressUI(prevRank, false, currentScore);
   if (didRankUp) {
     // Show the new rank in bold with exclamation point
-    const { currRank } = findRank(foundWords, answers, pangrams);
+    const { currRank } = findRank(currentScore, answers, pangrams);
     feedbackMsg = `<strong>${currRank}</strong>!`;
   } else {
     const feedbacks = ['Great job!', 'Nice!', 'Good!'];
