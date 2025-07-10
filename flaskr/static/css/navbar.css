@@ -190,22 +190,4 @@
     width: 16px;
     height: 2.5px;
   }
-  .found-words-box {
-    max-width: 80vw;
-    width: 80vw;
-    box-sizing: border-box;
-    padding: 0.5em 0.4em 0.4em 0.4em;
-    font-size: 0.93rem;
-    margin: 0.3rem auto 1.1rem auto;
-    left: 0;
-    right: 0;
-    position: relative;
-  }
-  .found-words-header {
-    font-size: 0.93rem;
-  }
-  .found-words-list {
-    font-size: 0.9rem;
-    max-height: 120px;
-  }
 }
