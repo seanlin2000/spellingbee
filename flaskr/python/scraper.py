@@ -29,9 +29,7 @@ def fetch_spelling_bee():
 
     # Extract answers and pangrams
     answers = data['today'].get('answers', [])
-    answers = [answer.capitalize() for answer in answers]
     pangrams = data['today'].get('pangrams', [])
-    pangrams = [pangram.capitalize() for pangram in pangrams]
 
     return {
         'center_letter': center,

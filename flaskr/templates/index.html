@@ -35,6 +35,13 @@
   </header>
   <main>
     <section class="game-container">
+      <div class="found-words-box">
+        <div class="found-words-header">
+          <span class="found-words-count">You have found 0 words</span>
+          <button class="found-words-toggle" aria-label="Expand word list" title="Show all words">&#x25BC;</button>
+        </div>
+        <div class="found-words-list" style="display:none;"></div>
+      </div>
       <div class="current-word" tabindex="0"></div>
       <div class="honeycomb">
         <!-- Honeycomb letters will be rendered here by app.js -->

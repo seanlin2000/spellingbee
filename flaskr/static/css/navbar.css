@@ -10,6 +10,7 @@
   border-bottom: 2px solid #FFCE1C;
   height: 48px;
   position: relative;
+  margin-bottom: 1.5rem;
 }
 .logo-area {
   display: flex;
@@ -104,41 +105,107 @@
   background: #6e6e6e;
   color: #fff;
 }
+.found-words-box {
+  background: #ffffff;
+  border: 1.5px solid #6b6b6b;
+  border-radius: 10px;
+  margin: 0 auto 1.1rem auto;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 0.7em 1.2em 0.5em 1.2em;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: 1.08rem;
+  color: #222;
+  position: relative;
+  margin-top: 0.5rem;
+}
+.found-words-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 1.08rem;
+}
+.found-words-count {
+  font-weight: 500;
+}
+.found-words-toggle {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #666;
+  padding: 0 0.2em;
+  transition: color 0.15s;
+}
+.found-words-toggle:hover {
+  color: #222;
+}
+.found-words-list {
+  margin-top: 0.7em;
+  max-height: 180px;
+  overflow-y: auto;
+  font-size: 1.01rem;
+  line-height: 1.5;
+  transition: max-height 0.2s;
+}
 @media (max-width: 700px) {
   .header {
     flex-direction: column;
     height: auto;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.5rem;
     align-items: flex-start;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
   }
   .logo-area {
     margin-bottom: 0.5rem;
+    gap: 0.5rem;
   }
   .bee-logo {
-    width: 36px;
-    height: 36px;
-  }
-  .logo-main {
-    font-size: 1.3rem;
-  }
-  .logo-date {
-    font-size: 0.9rem;
-  }
-  .hamburger-menu-container {
-    right: 1rem;
-    top: 0.5rem;
-  }
-  .dropdown-menu {
-    min-width: 120px;
-    right: 0;
-    top: 40px;
-  }
-  .hamburger-menu {
     width: 32px;
     height: 32px;
   }
+  .logo-main {
+    font-size: 1.1rem;
+  }
+  .logo-date {
+    font-size: 0.8rem;
+  }
+  .hamburger-menu-container {
+    right: 0.5rem;
+    top: 0.5rem;
+  }
+  .dropdown-menu {
+    min-width: 110px;
+    right: 0;
+    top: 36px;
+  }
+  .hamburger-menu {
+    width: 28px;
+    height: 28px;
+  }
   .hamburger-menu span {
-    width: 20px;
-    height: 3px;
+    width: 16px;
+    height: 2.5px;
+  }
+  .found-words-box {
+    max-width: 80vw;
+    width: 80vw;
+    box-sizing: border-box;
+    padding: 0.5em 0.4em 0.4em 0.4em;
+    font-size: 0.93rem;
+    margin: 0.3rem auto 1.1rem auto;
+    left: 0;
+    right: 0;
+    position: relative;
+  }
+  .found-words-header {
+    font-size: 0.93rem;
+  }
+  .found-words-list {
+    font-size: 0.9rem;
+    max-height: 120px;
   }
 }
