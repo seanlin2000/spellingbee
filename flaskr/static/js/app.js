@@ -1,21 +1,19 @@
 // Game logic for Spelling Bee
 import { positionHexagons, fetchBeeLetters, renderHoneycomb, addHoneycombClickListener } from "./honeycomb.js";
-import { submitWord, deleteChar, handleShuffleClick } from "./button.js";
+import { deleteChar, handleShuffleClick } from "./button.js";
 import {
   setHeaderDate, setupHamburgerMenu
 } from "./header.js";
 import { foundWords, updateFoundWordsDisplay, showFeedbackBubble } from "./submissions.js";
 import { computeScore, computeRankings, findRank, computePointsToNextRank } from "./scoring.js";
-import { updateProgressUI, renderProgressBar } from "./progress-bar.js";
+import { updateProgressUI } from "./progress-bar.js";
 
 let currentWord = '';
-let beeData = null; // Store the current bee letters
 const currentWordDiv = document.querySelector('.current-word');
 const hiddenInput = document.querySelector('.word-input');
 const deleteBtn = document.querySelector('.delete-btn');
 const submitBtn = document.querySelector('.submit-btn');
 const shuffleBtn = document.querySelector('.shuffle-btn');
-const honeycomb = document.querySelector('.honeycomb');
 let currentScore = 0; // Global tracker for the user's score
 
 function updateCurrentWordDisplay() {
@@ -51,13 +49,14 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   // Remove submitWord call here; only use handleWordSubmission for submitBtn
   submitBtn.addEventListener('click', () => {
-    setCurrentWord(hiddenInput.value.trim().toUpperCase()); // Only trim, do not uppercase
+    setCurrentWord(hiddenInput.value.trim().toUpperCase());
     handleWordSubmission();
   });
   deleteBtn.addEventListener('click', () => {
     deleteChar({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
   });
   shuffleBtn.addEventListener('click', () => {
+    const honeycomb = document.querySelector('.honeycomb');
     handleShuffleClick({ beeData: beeDataRef, renderHoneycomb, honeycomb });
   });
 
@@ -71,14 +70,12 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   try {
     const data = await fetchBeeLetters();
-    beeData = data;
     beeDataRef.value = data;
     renderHoneycomb(data.center_letter, data.outer_letters);
   } catch (e) {
     console.error('Error fetching bee letters:', e); // Log the error for debugging
-    beeData = { center_letter: 'A', outer_letters: ['B','C','D','E','F','G'] };
-    beeDataRef.value = beeData;
-    renderHoneycomb(beeData.center_letter, beeData.outer_letters);
+    beeDataRef.value = { center_letter: 'A', outer_letters: ['B','C','D','E','F','G'] };
+    renderHoneycomb(beeDataRef.value.center_letter, beeDataRef.value.outer_letters);
   }
   positionHexagons();
 
@@ -87,7 +84,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 
 hiddenInput.addEventListener('input', e => {
-  setCurrentWord(hiddenInput.value.trim().toUpperCase()); // Only trim, do not uppercase
+  setCurrentWord(hiddenInput.value.trim().toUpperCase());
   updateCurrentWordDisplay();
 });
 
@@ -133,9 +130,6 @@ function handleWordSubmission() {
   }
   word = capitalizeFirstLetter(word);
   // Get previous rank before adding word (use score, not foundWords)
-  const ranks = window.beeDataRef?.value?.rankings_order || [
-    'Beginner', 'Good Start', 'Moving Up', 'Good', 'Solid', 'Nice', 'Great', 'Amazing', 'Genius', 'Queen Bee'
-  ];
   const answers = window.beeDataRef?.value?.answers || [];
   const pangrams = window.beeDataRef?.value?.pangrams || [];
   // Calculate previous score (before adding this word)

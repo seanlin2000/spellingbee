@@ -46,8 +46,6 @@ export function renderProgressBar({
 }) {
   const progressBar = document.getElementById('progress-bar');
   const progressFill = document.getElementById('progress-fill');
-  const scoreStart = document.getElementById('score-start');
-  const scoreEnd = document.getElementById('score-end');
 
   // Remove old milestones
   progressBar.querySelectorAll('.milestone').forEach(dot => dot.remove());
@@ -113,7 +111,4 @@ export function renderProgressBar({
     dot.style.left = `${(i / (N - 1)) * 100}%`;
     progressBar.appendChild(dot);
   }
-  // Hide default score bubbles
-  scoreStart.style.display = 'none';
-  scoreEnd.style.display = 'none';
 }

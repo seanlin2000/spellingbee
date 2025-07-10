@@ -53,7 +53,6 @@ export function findRank(score, answers, pangrams) {
       break;
     }
     nextRank = ranking;
-    console.log(currRank, nextRank)
   }
   return { currRank, nextRank };
 }
