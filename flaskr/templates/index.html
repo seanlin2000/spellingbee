@@ -18,12 +18,18 @@
         <span class="logo-date"> <!-- Date will be filled by JS --> </span>
       </div>
     </div>
-    
-    <div class="topnav">
-      <a href="Rules">Rules</a>
-      <a href="https://www.nytimes.com/2025/07/09/crosswords/spelling-bee-forum.html">Hints</a>
-      <a href="#rankings">Rankings</a>
-      <a href="#stats">Stats</a>
+    <div class="hamburger-menu-container">
+      <button class="hamburger-menu" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="dropdown-menu">
+        <button class="dropdown-item rules-item">Rules</button>
+        <button class="dropdown-item hint-item">Hint</button>
+        <button class="dropdown-item rankings-item">Rankings</button>
+        <button class="dropdown-item stats-item">Stats</button>
+      </div>
     </div> 
 
   </header>
@@ -44,5 +50,6 @@
     </section>
   </main>
   <script type="module" src="/static/js/app.js"></script>
+  <script type="module" src="/static/js/honeycomb.js"></script>
 </body>
 </html>

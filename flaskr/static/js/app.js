@@ -2,11 +2,7 @@
 import { positionHexagons, fetchBeeLetters, renderHoneycomb, addHoneycombClickListener } from "./honeycomb.js";
 import { submitWord, deleteChar, handleShuffleClick } from "./button.js";
 import {
-  setHeaderDate,
-  updateHintsLink,
-  setupRulesPopup,
-  injectPopupAnimation,
-  setupRankingsPopup
+  setHeaderDate, setupHamburgerMenu
 } from "./header.js";
 
 let currentWord = '';
@@ -100,8 +96,5 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Call these on DOMContentLoaded
 window.addEventListener('DOMContentLoaded', () => {
   setHeaderDate();
-  updateHintsLink();
-  setupRulesPopup();
-  injectPopupAnimation();
-  setupRankingsPopup(beeDataRef); // Pass beeDataRef for rankings
+  setupHamburgerMenu();
 });
