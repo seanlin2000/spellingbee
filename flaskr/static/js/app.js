@@ -80,7 +80,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   positionHexagons();
 
   // After loading beeDataRef, render the progress bar and update rank UI
-  updateProgressUI(null, null, 0);
+  updateProgressUI(null, false, 0);
 });
 
 hiddenInput.addEventListener('input', e => {
@@ -121,7 +121,6 @@ function handleWordSubmission() {
   }
   if (!isValidAnswer(word)) {
     showFeedbackBubble('Not in word list');
-    // Do NOT clear the word for invalid answer
     return;
   }
   if (foundWords.includes(capitalizeFirstLetter(word))) {
