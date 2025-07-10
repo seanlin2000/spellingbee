@@ -98,3 +98,6 @@ window.addEventListener('DOMContentLoaded', () => {
   setHeaderDate();
   setupHamburgerMenu();
 });
+
+// Expose beeDataRef globally for header.js popup access
+window.beeDataRef = beeDataRef;
