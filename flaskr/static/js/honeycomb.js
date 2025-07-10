@@ -70,3 +70,27 @@ export function addHoneycombClickListener({ getCurrentWord, setCurrentWord, upda
     }
   });
 }
+
+// Add touch feedback with a 1ms delay for hexagons
+function addHexTouchFeedback() {
+  document.querySelectorAll('.hex').forEach(hex => {
+    let timeoutId = null;
+    const add = () => {
+      hex.classList.add('active-touch');
+    };
+    const remove = () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        hex.classList.remove('active-touch');
+      }, 1);
+    };
+    hex.addEventListener('touchstart', add);
+    hex.addEventListener('mousedown', add);
+    hex.addEventListener('touchend', remove);
+    hex.addEventListener('mouseup', remove);
+    hex.addEventListener('mouseleave', remove);
+    hex.addEventListener('touchcancel', remove);
+  });
+}
+
+window.addEventListener('DOMContentLoaded', addHexTouchFeedback);

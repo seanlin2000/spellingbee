@@ -1,9 +1,10 @@
 // Game logic for Spelling Bee
 import { positionHexagons, fetchBeeLetters, renderHoneycomb, addHoneycombClickListener } from "./honeycomb.js";
-import { submitWord, deleteChar, handleShuffleClick } from "./button.js";
+import { deleteChar, handleShuffleClick } from "./button.js";
 import {
   setHeaderDate, setupHamburgerMenu
 } from "./header.js";
+import { foundWords, updateFoundWordsDisplay, showFeedbackBubble } from "./submissions.js";
 
 let currentWord = '';
 let beeData = null; // Store the current bee letters
@@ -42,11 +43,11 @@ const setCurrentWord = (val) => { currentWord = val; };
 // Use a wrapper object for beeData so button.js can access latest value
 const beeDataRef = { value: null };
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
   hiddenInput.focus();
 
   submitBtn.addEventListener('click', () => {
-    submitWord({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
+    handleWordSubmission();
   });
   deleteBtn.addEventListener('click', () => {
     deleteChar({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
@@ -56,30 +57,13 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   const gameContainer = document.querySelector('.game-container');
-
   gameContainer.addEventListener('click', () => hiddenInput.focus());
 
-  // Move honeycomb click listener to honeycomb.js
-  // addHoneycombClickListener will be called here
   addHoneycombClickListener({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
-});
 
-hiddenInput.addEventListener('input', e => {
-  setCurrentWord(hiddenInput.value.toUpperCase());
-  updateCurrentWordDisplay();
-});
+  setHeaderDate();
+  setupHamburgerMenu();
 
-hiddenInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    submitWord({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
-    e.preventDefault();
-  } else if (e.key.length === 1 && !/^[a-zA-Z]$/.test(e.key)) {
-    e.preventDefault();
-  }
-});
-
-window.addEventListener('resize', positionHexagons);
-document.addEventListener('DOMContentLoaded', async () => {
   try {
     const data = await fetchBeeLetters();
     beeData = data;
@@ -93,11 +77,58 @@ document.addEventListener('DOMContentLoaded', async () => {
   positionHexagons();
 });
 
-// Call these on DOMContentLoaded
-window.addEventListener('DOMContentLoaded', () => {
-  setHeaderDate();
-  setupHamburgerMenu();
+hiddenInput.addEventListener('input', e => {
+  setCurrentWord(hiddenInput.value.toUpperCase());
+  updateCurrentWordDisplay();
 });
+
+hiddenInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    handleWordSubmission();
+    e.preventDefault();
+  } else if (e.key.length === 1 && !/^[a-zA-Z]$/.test(e.key)) {
+    e.preventDefault();
+  }
+});
+
+window.addEventListener('resize', positionHexagons);
+
+function isValidAnswer(word) {
+  const answers = window.beeDataRef?.value?.answers || [];
+  return answers.includes(word.toLowerCase());
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+function handleWordSubmission() {
+  let word = getCurrentWord();
+  const center = beeDataRef.value?.center_letter?.toUpperCase();
+  if (word.length < 4) {
+    showFeedbackBubble('Too short');
+    return;
+  }
+  if (!word.includes(center)) {
+    showFeedbackBubble('Missing center letter');
+    return;
+  }
+  if (!isValidAnswer(word)) {
+    showFeedbackBubble('Not in word list');
+    return;
+  }
+  if (foundWords.includes(capitalizeFirstLetter(word))) {
+    showFeedbackBubble('Already found');
+    return;
+  }
+  word = capitalizeFirstLetter(word);
+  foundWords.push(word);
+  updateFoundWordsDisplay();
+  showFeedbackBubble('Great job!');
+  setCurrentWord('');
+  updateCurrentWordDisplay();
+  hiddenInput.value = '';
+}
 
 // Expose beeDataRef globally for header.js popup access
 window.beeDataRef = beeDataRef;
