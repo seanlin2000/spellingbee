@@ -82,7 +82,6 @@ export function setupHamburgerMenu() {
     dropdown.classList.remove('show');
   });
   document.querySelector('.stats-item')?.addEventListener('click', () => {
-    alert('Stats popup coming soon!');
     dropdown.classList.remove('show');
   });
 }

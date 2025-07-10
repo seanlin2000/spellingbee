@@ -5,15 +5,16 @@ import {
   setHeaderDate, setupHamburgerMenu
 } from "./header.js";
 import { foundWords, updateFoundWordsDisplay, showFeedbackBubble } from "./submissions.js";
+import { computeScore, computeRankings, findRank, computePointsToNextRank } from "./scoring.js";
+import { updateProgressUI } from "./progress-bar.js";
 
 let currentWord = '';
-let beeData = null; // Store the current bee letters
 const currentWordDiv = document.querySelector('.current-word');
 const hiddenInput = document.querySelector('.word-input');
 const deleteBtn = document.querySelector('.delete-btn');
 const submitBtn = document.querySelector('.submit-btn');
 const shuffleBtn = document.querySelector('.shuffle-btn');
-const honeycomb = document.querySelector('.honeycomb');
+let currentScore = 0; // Global tracker for the user's score
 
 function updateCurrentWordDisplay() {
   // Get all valid letters from honeycomb (center + outer)
@@ -46,13 +47,16 @@ const beeDataRef = { value: null };
 window.addEventListener('DOMContentLoaded', async () => {
   hiddenInput.focus();
 
+  // Remove submitWord call here; only use handleWordSubmission for submitBtn
   submitBtn.addEventListener('click', () => {
+    setCurrentWord(hiddenInput.value.trim().toUpperCase());
     handleWordSubmission();
   });
   deleteBtn.addEventListener('click', () => {
     deleteChar({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
   });
   shuffleBtn.addEventListener('click', () => {
+    const honeycomb = document.querySelector('.honeycomb');
     handleShuffleClick({ beeData: beeDataRef, renderHoneycomb, honeycomb });
   });
 
@@ -66,19 +70,21 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   try {
     const data = await fetchBeeLetters();
-    beeData = data;
     beeDataRef.value = data;
     renderHoneycomb(data.center_letter, data.outer_letters);
   } catch (e) {
-    beeData = { center_letter: 'A', outer_letters: ['B','C','D','E','F','G'] };
-    beeDataRef.value = beeData;
-    renderHoneycomb(beeData.center_letter, beeData.outer_letters);
+    console.error('Error fetching bee letters:', e); // Log the error for debugging
+    beeDataRef.value = { center_letter: 'A', outer_letters: ['B','C','D','E','F','G'] };
+    renderHoneycomb(beeDataRef.value.center_letter, beeDataRef.value.outer_letters);
   }
   positionHexagons();
+
+  // After loading beeDataRef, render the progress bar and update rank UI
+  updateProgressUI(null, false, 0);
 });
 
 hiddenInput.addEventListener('input', e => {
-  setCurrentWord(hiddenInput.value.toUpperCase());
+  setCurrentWord(hiddenInput.value.trim().toUpperCase());
   updateCurrentWordDisplay();
 });
 
@@ -103,7 +109,7 @@ function capitalizeFirstLetter(string) {
 }
 
 function handleWordSubmission() {
-  let word = getCurrentWord();
+  let word = getCurrentWord().trim().toUpperCase();
   const center = beeDataRef.value?.center_letter?.toUpperCase();
   if (word.length < 4) {
     showFeedbackBubble('Too short');
@@ -122,12 +128,84 @@ function handleWordSubmission() {
     return;
   }
   word = capitalizeFirstLetter(word);
+  // Get previous rank before adding word (use score, not foundWords)
+  const answers = window.beeDataRef?.value?.answers || [];
+  const pangrams = window.beeDataRef?.value?.pangrams || [];
+  // Calculate previous score (before adding this word)
+  const prevScore = currentScore;
+  const { currRank: prevRank } = findRank(prevScore, answers, pangrams);
+
+  // Compute points for this word
+  const points = computeScore([word.toLowerCase()], pangrams);
+  currentScore += points; // Update global score
+
   foundWords.push(word);
   updateFoundWordsDisplay();
-  showFeedbackBubble('Great job!');
+  // Pangram feedback or random positive feedback or rank up
+  let didPangram = false;
+  let feedbackMsg = '';
+  if (pangrams.includes(word.toLowerCase())) {
+    feedbackMsg = '<strong>Pangram!</strong>';
+    didPangram = true;
+    feedbackMsg += ` <span style='color:#222;font-weight:700;'>+${points}</span>`;
+    showFeedbackBubble(feedbackMsg);
+    setCurrentWord('');
+    updateCurrentWordDisplay();
+    hiddenInput.value = '';
+    updateProgressUI(null, false, currentScore); // Don't show rank up if pangram
+    return;
+  }
   setCurrentWord('');
   updateCurrentWordDisplay();
   hiddenInput.value = '';
+  const didRankUp = updateProgressUI(prevRank, false, currentScore);
+  if (didRankUp) {
+    // Show the new rank in bold with exclamation point
+    const { currRank } = findRank(currentScore, answers, pangrams);
+    feedbackMsg = `<strong>${currRank}</strong>!`;
+  } else {
+    const feedbacks = ['Great job!', 'Nice!', 'Good!'];
+    const msg = feedbacks[Math.floor(Math.random() * feedbacks.length)];
+    feedbackMsg = msg;
+  }
+  feedbackMsg += ` <span style='color:#222;font-weight:700;'>+${points}</span>`;
+  showFeedbackBubble(feedbackMsg);
+}
+
+// SHARE BUTTON FUNCTIONALITY
+const shareBtn = document.getElementById('share-btn');
+if (shareBtn) {
+  shareBtn.addEventListener('click', async () => {
+    // Get rank from DOM
+    const rank = document.getElementById('rank-title')?.textContent?.trim() || 'Unknown';
+    // Use currentScore variable for score
+    const score = typeof currentScore === 'number' ? currentScore : 0;
+    // Get found words from the JS state if available, else from DOM
+    let words = [];
+    if (window.foundWords && Array.isArray(window.foundWords)) {
+      words = window.foundWords;
+    } else {
+      // Try to get from DOM as fallback
+      const wordEls = document.querySelectorAll('.found-words-list div');
+      words = Array.from(wordEls).map(el => el.textContent.trim());
+    }
+    // Sort by length descending, pick top 3
+    const topWords = words.sort((a, b) => b.length - a.length).slice(0, 3);
+    const topWordsStr = topWords.join(', ') || 'N/A';
+    // Get today's date
+    const today = new Date();
+    const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    // Compose message
+    const shareText = `I hit ${rank} rank with a score of ${score} on NYT Spelling Bee today! My most impressive words were ${topWordsStr}. (${dateStr})`;
+    try {
+      await navigator.clipboard.writeText(shareText);
+      shareBtn.textContent = 'Copied!';
+      setTimeout(() => { shareBtn.textContent = 'Share'; }, 1500);
+    } catch (e) {
+      shareBtn.textContent = 'Failed to copy';
+      setTimeout(() => { shareBtn.textContent = 'Share'; }, 1500);
+    }
+  });
 }
 
 // Expose beeDataRef globally for header.js popup access

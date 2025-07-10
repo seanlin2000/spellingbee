@@ -44,7 +44,7 @@ if (feedbackBubbleContainer) {
 }
 
 export function showFeedbackBubble(msg) {
-  feedbackBubble.textContent = msg;
+  feedbackBubble.innerHTML = msg;
   feedbackBubble.style.display = 'block';
   feedbackBubble.style.opacity = 0;
   setTimeout(() => {

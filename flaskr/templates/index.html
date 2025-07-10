@@ -36,6 +36,18 @@
   </header>
   <main>
     <section class="game-container">
+      <div class="progress-container">
+        <div class="level-label">
+          <div class="title" id="rank-title">Beginner</div>
+          <div class="subtitle" id="rank-subtitle"><strong>8</strong> to Novice</div>
+        </div>
+        <div class="progress-bar-wrapper">
+          <div class="progress-bar" id="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+            <!-- Dots will be injected here by JS -->
+          </div>
+        </div>
+      </div>
       <div class="found-words-box">
         <div class="found-words-header">
           <span class="found-words-count">You have found 0 words</span>
@@ -46,9 +58,8 @@
       <div id="feedback-bubble-container" style="height:38px;"></div>
       <div class="current-word" tabindex="0"></div>
       <div class="honeycomb">
-        <!-- Honeycomb letters will be rendered here by app.js -->
       </div>
-      <input class="word-input" type="text" style="opacity:0;" autocomplete="off" />
+      <input class="word-input" type="text" autocomplete="off" />
       <div class="game-buttons">
         <button class="delete-btn">Delete</button>
         <button class="shuffle-btn" title="Shuffle">
@@ -56,9 +67,11 @@
         </button>
         <button class="submit-btn">Enter</button>
       </div>
+      <div class="share-btn-row">
+        <button class="share-btn" id="share-btn">Share</button>
+      </div>
     </section>
   </main>
   <script type="module" src="/static/js/app.js"></script>
-  <script type="module" src="/static/js/honeycomb.js"></script>
 </body>
 </html>

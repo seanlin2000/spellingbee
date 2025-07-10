@@ -1,14 +1,5 @@
-// Handles button event listeners for submit, delete, and shuffle
-// Exports: submitWord, deleteChar, handleShuffleClick
-
-export function submitWord({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput }) {
-  const word = getCurrentWord();
-  if (word) {
-    setCurrentWord('');
-    hiddenInput.value = '';
-    updateCurrentWordDisplay();
-  }
-}
+// Handles button event listeners for delete and shuffle
+// Exports: deleteChar, handleShuffleClick
 
 export function deleteChar({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput }) {
   const word = getCurrentWord();
