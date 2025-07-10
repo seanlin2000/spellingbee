@@ -42,8 +42,7 @@ export function computeRankings(maxScore) {
   return rankingScores;
 }
 
-export function findRank(foundWords, answers, pangrams) {
-  const score = computeScore(foundWords, pangrams);
+export function findRank(score, answers, pangrams) {
   const maxScore = computeScore(answers, pangrams);
   const rankingScores = computeRankings(maxScore);
   const descending = Object.entries(rankingScores).sort((a, b) => b[1] - a[1]);
@@ -54,14 +53,16 @@ export function findRank(foundWords, answers, pangrams) {
       break;
     }
     nextRank = ranking;
+    console.log(currRank, nextRank)
   }
   return { currRank, nextRank };
 }
 
-export function computePointsToNextRank(foundWords, answers, pangrams) {
-  const score = computeScore(foundWords, pangrams);
+export function computePointsToNextRank(answers, pangrams, currentScore) {
+  // Always use the provided currentScore
+  const score = currentScore;
   const maxScore = computeScore(answers, pangrams);
   const rankingScores = computeRankings(maxScore);
-  const { nextRank } = findRank(foundWords, answers, pangrams);
+  const { nextRank } = findRank(score, answers, pangrams);
   return nextRank ? (rankingScores[nextRank] - score) : 0;
 }

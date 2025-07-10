@@ -2,7 +2,7 @@
 import { foundWords } from "./submissions.js";
 import { computeScore, findRank, computePointsToNextRank } from "./scoring.js";
 
-export function updateProgressUI(prevRank = null, didRankUp = false, currentScoreOverride = null) {
+export function updateProgressUI(prevRank = null, didRankUp = false, currentScore = 0) {
   const ranks = window.beeDataRef?.value?.rankings_order || [
     'Beginner', 'Good Start', 'Moving Up', 'Good', 'Solid', 'Nice', 'Great', 'Amazing', 'Genius', 'Queen Bee'
   ];
@@ -10,9 +10,8 @@ export function updateProgressUI(prevRank = null, didRankUp = false, currentScor
   const pangrams = window.beeDataRef?.value?.pangrams || [];
   const maxScore = computeScore(answers, pangrams);
   // Use the global tracker if provided, else recalculate
-  const score = currentScoreOverride !== null ? currentScoreOverride : computeScore(foundWords, pangrams);
-  const { currRank, nextRank } = findRank(foundWords, answers, pangrams);
-  const pointsToNext = computePointsToNextRank(foundWords, answers, pangrams);
+  const { currRank, nextRank } = findRank(currentScore, answers, pangrams);
+  const pointsToNext = computePointsToNextRank(answers, pangrams, currentScore);
 
   // Update level-label UI
   const rankTitle = document.getElementById('rank-title');
@@ -28,7 +27,7 @@ export function updateProgressUI(prevRank = null, didRankUp = false, currentScor
 
   // Progress bar logic
   const currentRankIdx = ranks.indexOf(currRank || ranks[0]);
-  renderProgressBar({ currentScore: score, maxScore, ranks, currentRankIdx, currRank });
+  renderProgressBar({ currentScore, maxScore, ranks, currentRankIdx, currRank });
 
   // Return whether a rank up occurred
   if (prevRank && currRank && prevRank !== currRank) {
@@ -86,6 +85,7 @@ export function renderProgressBar({
     if (currRank === 'Queen Bee' && i === N - 1) {
       dot.classList.add('big', 'end', 'active');
       dot.textContent = maxScore;
+      dot.style.background = '#ffe066'; // Shade in the far right circle
     } else if (i === 0) {
       // Start circle
       if (currentRankIdx === 0) {

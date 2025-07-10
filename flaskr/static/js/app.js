@@ -83,7 +83,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   positionHexagons();
 
   // After loading beeDataRef, render the progress bar and update rank UI
-  updateProgressUI(null);
+  updateProgressUI(null, null, 0);
 });
 
 hiddenInput.addEventListener('input', e => {
