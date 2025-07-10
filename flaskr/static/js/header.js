@@ -62,78 +62,7 @@ export function setupHamburgerMenu() {
   // Add placeholder listeners for other items
   document.querySelector('.rules-item')?.addEventListener('click', () => {
     // Build the rules popup content as a DOM node for better formatting
-    const wrapper = document.createElement('div');
-
-    // Section 1: Intro
-    const intro = document.createElement('div');
-    intro.textContent = 'Create words using letters from the hive.';
-    intro.style.marginBottom = '1.1em';
-    intro.style.fontWeight = '400';
-    intro.style.fontSize = '1.05rem';
-    intro.style.fontFamily = "'Inter', 'Segoe UI', 'Arial', 'sans-serif'";
-    wrapper.appendChild(intro);
-
-    // Section 2: Word rules (bulleted)
-    const wordRules = [
-      'Words must contain at least 4 letters.',
-      'Words must include the center letter.',
-      'Our word list does not include words that are obscure, hyphenated, or proper nouns.',
-      'No cussing either, sorry.',
-      'Letters can be used more than once.'
-    ];
-    const wordRulesList = document.createElement('ul');
-    wordRulesList.style.margin = '0 0 0 0'; // reduce left indent
-    wordRulesList.style.fontWeight = '400';
-    wordRulesList.style.fontSize = '1.05rem';
-    wordRulesList.style.fontFamily = "'Inter', 'Segoe UI', 'Arial', 'sans-serif'";
-    wordRules.forEach(rule => {
-      const li = document.createElement('li');
-      li.textContent = rule;
-      wordRulesList.appendChild(li);
-    });
-    wrapper.appendChild(wordRulesList);
-
-    // Section 3: Score points intro
-    const scoreIntro = document.createElement('div');
-    scoreIntro.textContent = 'Score points to increase your rating.';
-    scoreIntro.style.margin = '1.2em 0 0.7em 0';
-    scoreIntro.style.fontWeight = '400';
-    scoreIntro.style.fontSize = '1.05rem';
-    scoreIntro.style.fontFamily = "'Inter', 'Segoe UI', 'Arial', 'sans-serif'";
-    wrapper.appendChild(scoreIntro);
-
-    // Section 4: Scoring rules (bulleted)
-    const scoringRules = [
-      '4-letter words are worth 1 point each.',
-      'Longer words earn 1 point per letter.',
-      'Each puzzle includes at least one “pangram” which uses every letter. These are worth 7 extra points!'
-    ];
-    const scoringRulesList = document.createElement('ul');
-    scoringRulesList.style.margin = '0 0 0 0'; // reduce left indent
-    scoringRulesList.style.fontWeight = '400';
-    scoringRulesList.style.fontSize = '1.05rem';
-    scoringRulesList.style.fontFamily = "'Inter', 'Segoe UI', 'Arial', 'sans-serif'";
-    scoringRules.forEach(rule => {
-      const li = document.createElement('li');
-      li.textContent = rule;
-      scoringRulesList.appendChild(li);
-    });
-    wrapper.appendChild(scoringRulesList);
-
-    // Section 5: New puzzle info
-    const newPuzzle = document.createElement('div');
-    newPuzzle.textContent = 'New puzzles are released daily at 3 a.m. ET.';
-    newPuzzle.style.margin = '1.2em 0 0 0';
-    newPuzzle.style.fontWeight = '400';
-    newPuzzle.style.fontSize = '1.05rem';
-    newPuzzle.style.fontFamily = "'Inter', 'Segoe UI', 'Arial', 'sans-serif'";
-    wrapper.appendChild(newPuzzle);
-
-    showPopup({
-      heading: 'How to Play Spelling Bee',
-      content: wrapper,
-      contentType: 'node'
-    });
+    showRulesPopup();
     dropdown.classList.remove('show');
   });
   document.querySelector('.rankings-item')?.addEventListener('click', () => {
@@ -245,6 +174,80 @@ function showPopup({ heading, content, contentType = 'div' }) {
   overlay.addEventListener('click', e => {
     if (e.target === overlay) overlay.remove();
   });
+}
+
+function showRulesPopup() {
+    const wrapper = document.createElement('div');
+      // Section 1: Intro
+    const intro = document.createElement('div');
+    intro.textContent = 'Create words using letters from the hive.';
+    intro.style.marginBottom = '1.1em';
+    intro.style.fontWeight = '400';
+    intro.style.fontSize = '1.05rem';
+    intro.style.fontFamily = "'Inter', 'Segoe UI', 'Arial', 'sans-serif'";
+    wrapper.appendChild(intro);
+
+    // Section 2: Word rules (bulleted)
+    const wordRules = [
+      'Words must contain at least 4 letters.',
+      'Words must include the center letter.',
+      'Our word list does not include words that are obscure, hyphenated, or proper nouns.',
+      'No cussing either, sorry.',
+      'Letters can be used more than once.'
+    ];
+    const wordRulesList = document.createElement('ul');
+    wordRulesList.style.margin = '0 0 0 0'; // reduce left indent
+    wordRulesList.style.fontWeight = '400';
+    wordRulesList.style.fontSize = '1.05rem';
+    wordRulesList.style.fontFamily = "'Inter', 'Segoe UI', 'Arial', 'sans-serif'";
+    wordRules.forEach(rule => {
+      const li = document.createElement('li');
+      li.textContent = rule;
+      wordRulesList.appendChild(li);
+    });
+    wrapper.appendChild(wordRulesList);
+
+    // Section 3: Score points intro
+    const scoreIntro = document.createElement('div');
+    scoreIntro.textContent = 'Score points to increase your rating.';
+    scoreIntro.style.margin = '1.2em 0 0.7em 0';
+    scoreIntro.style.fontWeight = '400';
+    scoreIntro.style.fontSize = '1.05rem';
+    scoreIntro.style.fontFamily = "'Inter', 'Segoe UI', 'Arial', 'sans-serif'";
+    wrapper.appendChild(scoreIntro);
+
+    // Section 4: Scoring rules (bulleted)
+    const scoringRules = [
+      '4-letter words are worth 1 point each.',
+      'Longer words earn 1 point per letter.',
+      'Each puzzle includes at least one “pangram” which uses every letter. These are worth 7 extra points!'
+    ];
+    const scoringRulesList = document.createElement('ul');
+    scoringRulesList.style.margin = '0 0 0 0'; // reduce left indent
+    scoringRulesList.style.fontWeight = '400';
+    scoringRulesList.style.fontSize = '1.05rem';
+    scoringRulesList.style.fontFamily = "'Inter', 'Segoe UI', 'Arial', 'sans-serif'";
+    scoringRules.forEach(rule => {
+      const li = document.createElement('li');
+      li.textContent = rule;
+      scoringRulesList.appendChild(li);
+    });
+    wrapper.appendChild(scoringRulesList);
+
+    // Section 5: New puzzle info
+    const newPuzzle = document.createElement('div');
+    newPuzzle.textContent = 'New puzzles are released daily at 3 a.m. ET.';
+    newPuzzle.style.margin = '1.2em 0 0 0';
+    newPuzzle.style.fontWeight = '400';
+    newPuzzle.style.fontSize = '1.05rem';
+    newPuzzle.style.fontFamily = "'Inter', 'Segoe UI', 'Arial', 'sans-serif'";
+    wrapper.appendChild(newPuzzle);
+
+    showPopup({
+      heading: 'How to Play Spelling Bee',
+      content: wrapper,
+      contentType: 'node'
+    });
 }
 
 // Refactored Rankings popup
