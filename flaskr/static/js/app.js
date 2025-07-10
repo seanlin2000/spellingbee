@@ -6,6 +6,7 @@ import {
 } from "./header.js";
 import { foundWords, updateFoundWordsDisplay, showFeedbackBubble } from "./submissions.js";
 import { computeScore, computeRankings, findRank, computePointsToNextRank } from "./scoring.js";
+import { updateProgressUI, renderProgressBar } from "./progress-bar.js";
 
 let currentWord = '';
 let beeData = null; // Store the current bee letters
@@ -15,6 +16,7 @@ const deleteBtn = document.querySelector('.delete-btn');
 const submitBtn = document.querySelector('.submit-btn');
 const shuffleBtn = document.querySelector('.shuffle-btn');
 const honeycomb = document.querySelector('.honeycomb');
+let currentScore = 0; // Global tracker for the user's score
 
 function updateCurrentWordDisplay() {
   // Get all valid letters from honeycomb (center + outer)
@@ -47,8 +49,10 @@ const beeDataRef = { value: null };
 window.addEventListener('DOMContentLoaded', async () => {
   hiddenInput.focus();
 
+  // Remove submitWord call here; only use handleWordSubmission for submitBtn
   submitBtn.addEventListener('click', () => {
-    submitWord({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
+    setCurrentWord(hiddenInput.value.trim().toUpperCase()); // Only trim, do not uppercase
+    handleWordSubmission();
   });
   deleteBtn.addEventListener('click', () => {
     deleteChar({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
@@ -79,11 +83,11 @@ window.addEventListener('DOMContentLoaded', async () => {
   positionHexagons();
 
   // After loading beeDataRef, render the progress bar and update rank UI
-  updateProgressUI();
+  updateProgressUI(null);
 });
 
 hiddenInput.addEventListener('input', e => {
-  setCurrentWord(hiddenInput.value.toUpperCase());
+  setCurrentWord(hiddenInput.value.trim().toUpperCase()); // Only trim, do not uppercase
   updateCurrentWordDisplay();
 });
 
@@ -107,36 +111,8 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
-function updateProgressUI() {
-  const ranks = window.beeDataRef?.value?.rankings_order || [
-    'Beginner', 'Good Start', 'Moving Up', 'Good', 'Solid', 'Nice', 'Great', 'Amazing', 'Genius', 'Queen Bee'
-  ];
-  const answers = window.beeDataRef?.value?.answers || [];
-  const pangrams = window.beeDataRef?.value?.pangrams || [];
-  const maxScore = computeScore(answers, pangrams);
-  const score = computeScore(foundWords, pangrams);
-  const { currRank, nextRank } = findRank(foundWords, answers, pangrams);
-  const pointsToNext = computePointsToNextRank(foundWords, answers, pangrams);
-
-  // Update level-label UI
-  const rankTitle = document.getElementById('rank-title');
-  const rankSubtitle = document.getElementById('rank-subtitle');
-  if (rankTitle) rankTitle.textContent = currRank || ranks[0];
-  if (rankSubtitle) {
-    if (nextRank) {
-      rankSubtitle.innerHTML = `<strong>${pointsToNext}</strong> to ${nextRank}`;
-    } else {
-      rankSubtitle.innerHTML = `<strong>Max</strong> rank!`;
-    }
-  }
-
-  // Progress bar logic
-  const currentRankIdx = ranks.indexOf(currRank || ranks[0]);
-  renderProgressBar({ currentScore: score, maxScore, ranks, currentRankIdx });
-}
-
 function handleWordSubmission() {
-  let word = getCurrentWord();
+  let word = getCurrentWord().trim().toUpperCase();
   const center = beeDataRef.value?.center_letter?.toUpperCase();
   if (word.length < 4) {
     showFeedbackBubble('Too short');
@@ -148,6 +124,7 @@ function handleWordSubmission() {
   }
   if (!isValidAnswer(word)) {
     showFeedbackBubble('Not in word list');
+    // Do NOT clear the word for invalid answer
     return;
   }
   if (foundWords.includes(capitalizeFirstLetter(word))) {
@@ -155,64 +132,50 @@ function handleWordSubmission() {
     return;
   }
   word = capitalizeFirstLetter(word);
+  // Get previous rank before adding word
+  const ranks = window.beeDataRef?.value?.rankings_order || [
+    'Beginner', 'Good Start', 'Moving Up', 'Good', 'Solid', 'Nice', 'Great', 'Amazing', 'Genius', 'Queen Bee'
+  ];
+  const answers = window.beeDataRef?.value?.answers || [];
+  const pangrams = window.beeDataRef?.value?.pangrams || [];
+  const { currRank: prevRank } = findRank(foundWords, answers, pangrams);
+
+  // Compute points for this word
+  const points = computeScore([word.toLowerCase()], pangrams);
+  currentScore += points; // Update global score
+
   foundWords.push(word);
   updateFoundWordsDisplay();
-  showFeedbackBubble('Great job!');
+  // Pangram feedback or random positive feedback or rank up
+  let didPangram = false;
+  let feedbackMsg = '';
+  if (pangrams.includes(word.toLowerCase())) {
+    feedbackMsg = '<strong>Pangram!</strong>';
+    didPangram = true;
+    feedbackMsg += ` <span style='color:#222;font-weight:700;'>+${points}</span>`;
+    showFeedbackBubble(feedbackMsg);
+    setCurrentWord('');
+    updateCurrentWordDisplay();
+    hiddenInput.value = '';
+    updateProgressUI(null, false, currentScore); // Don't show rank up if pangram
+    return;
+  }
   setCurrentWord('');
   updateCurrentWordDisplay();
   hiddenInput.value = '';
-  updateProgressUI(); // <-- update progress/rank after word submission
+  const didRankUp = updateProgressUI(prevRank, false, currentScore);
+  if (didRankUp) {
+    // Show the new rank in bold with exclamation point
+    const { currRank } = findRank(foundWords, answers, pangrams);
+    feedbackMsg = `<strong>${currRank}</strong>!`;
+  } else {
+    const feedbacks = ['Great job!', 'Nice!', 'Good!'];
+    const msg = feedbacks[Math.floor(Math.random() * feedbacks.length)];
+    feedbackMsg = msg;
+  }
+  feedbackMsg += ` <span style='color:#222;font-weight:700;'>+${points}</span>`;
+  showFeedbackBubble(feedbackMsg);
 }
-
-submitBtn.addEventListener('click', () => {
-  handleWordSubmission();
-});
 
 // Expose beeDataRef globally for header.js popup access
 window.beeDataRef = beeDataRef;
-
-function renderProgressBar({
-  currentScore,
-  maxScore,
-  ranks,
-  currentRankIdx
-}) {
-  const progressBar = document.getElementById('progress-bar');
-  const progressFill = document.getElementById('progress-fill');
-  const scoreStart = document.getElementById('score-start');
-  const scoreEnd = document.getElementById('score-end');
-
-  // Remove old milestones
-  progressBar.querySelectorAll('.milestone').forEach(dot => dot.remove());
-
-  // Set fill
-  const percent = Math.min((currentScore / maxScore) * 100, 100);
-  progressFill.style.width = `${percent}%`;
-
-  // Place milestones (including big start/end)
-  const N = ranks.length;
-  for (let i = 0; i < N; ++i) {
-    const dot = document.createElement('div');
-    dot.className = 'milestone';
-    if (i === 0) {
-      dot.classList.add('big');
-      dot.textContent = currentScore;
-    } else if (i === N - 1) {
-      dot.classList.add('big', 'end');
-      dot.textContent = maxScore;
-    } else {
-      dot.classList.add('small');
-      dot.textContent = '';
-    }
-    // Highlight current rank
-    if (i === currentRankIdx) {
-      dot.classList.add('active');
-    }
-    // Evenly space all circles, including endpoints
-    dot.style.left = `${(i / (N - 1)) * 100}%`;
-    progressBar.appendChild(dot);
-  }
-  // Hide default score bubbles
-  scoreStart.style.display = 'none';
-  scoreEnd.style.display = 'none';
-}
