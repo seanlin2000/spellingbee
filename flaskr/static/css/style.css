@@ -44,8 +44,38 @@ body {
   z-index: 1;
 }
 
+.share-btn-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.share-btn {
+  background-color: #ffd600;
+  color: #222;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s, color 0.2s;
+}
+.share-btn:active {
+  background: #ffe066;
+}
 @media (max-width: 500px) {
   .word-input { width: 120px; }
 }
-@media (max-width: 700px) {
+@media (max-width: 600px) {
+  .share-btn {
+    width: 30vw;
+    max-width: 350px;
+    font-size: 1rem;
+    padding: 12px 0;
+  }
+  .share-btn-row {
+    margin-top: 12px;
+  }
 }

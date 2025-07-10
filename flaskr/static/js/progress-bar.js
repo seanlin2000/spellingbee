@@ -43,7 +43,6 @@ export function renderProgressBar({
   ranks,
   currentRankIdx,
   currRank,
-  prevRankIdx = null
 }) {
   const progressBar = document.getElementById('progress-bar');
   const progressFill = document.getElementById('progress-fill');

@@ -179,5 +179,41 @@ function handleWordSubmission() {
   showFeedbackBubble(feedbackMsg);
 }
 
+// SHARE BUTTON FUNCTIONALITY
+const shareBtn = document.getElementById('share-btn');
+if (shareBtn) {
+  shareBtn.addEventListener('click', async () => {
+    // Get rank from DOM
+    const rank = document.getElementById('rank-title')?.textContent?.trim() || 'Unknown';
+    // Use currentScore variable for score
+    const score = typeof currentScore === 'number' ? currentScore : 0;
+    // Get found words from the JS state if available, else from DOM
+    let words = [];
+    if (window.foundWords && Array.isArray(window.foundWords)) {
+      words = window.foundWords;
+    } else {
+      // Try to get from DOM as fallback
+      const wordEls = document.querySelectorAll('.found-words-list div');
+      words = Array.from(wordEls).map(el => el.textContent.trim());
+    }
+    // Sort by length descending, pick top 3
+    const topWords = words.sort((a, b) => b.length - a.length).slice(0, 3);
+    const topWordsStr = topWords.join(', ') || 'N/A';
+    // Get today's date
+    const today = new Date();
+    const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    // Compose message
+    const shareText = `I hit ${rank} rank with a score of ${score} on NYT Spelling Bee today! My most impressive words were ${topWordsStr}. (${dateStr})`;
+    try {
+      await navigator.clipboard.writeText(shareText);
+      shareBtn.textContent = 'Copied!';
+      setTimeout(() => { shareBtn.textContent = 'Share'; }, 1500);
+    } catch (e) {
+      shareBtn.textContent = 'Failed to copy';
+      setTimeout(() => { shareBtn.textContent = 'Share'; }, 1500);
+    }
+  });
+}
+
 // Expose beeDataRef globally for header.js popup access
 window.beeDataRef = beeDataRef;
