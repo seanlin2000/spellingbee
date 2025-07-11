@@ -22,4 +22,6 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run writer.py
+        env:
+            GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         run: python python/writer.py
