@@ -79,3 +79,38 @@ body {
     margin-top: 12px;
   }
 }
+@media (max-width: 700px) {
+  .game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 100vh;
+    padding-bottom: 2rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .honeycomb {
+    margin-bottom: 1rem;
+  }
+  .game-buttons {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .share-btn-row {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
+  .found-words-box {
+    margin-bottom: 1rem;
+  }
+  .progress-container {
+    margin-bottom: 1rem;
+  }
+  .current-word {
+    margin-bottom: 0.5rem;
+  }
+}

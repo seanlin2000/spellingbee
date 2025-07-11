@@ -13,6 +13,7 @@ const deleteBtn = document.querySelector('.delete-btn');
 const submitBtn = document.querySelector('.submit-btn');
 const shuffleBtn = document.querySelector('.shuffle-btn');
 let currentScore = 0; // Globasl tracker for the user's score
+let globalCurrentDate = null;
 
 function updateCurrentWordDisplay() {
   // Get all valid letters from honeycomb (center + outer)
@@ -43,7 +44,11 @@ const setCurrentWord = (val) => { currentWord = val; };
 const beeDataRef = { value: null };
 
 window.addEventListener('DOMContentLoaded', async () => {
-  hiddenInput.focus();
+  // Only focus hiddenInput on desktop devices
+  console.log(navigator.userAgent)
+  if (!/Mobi|Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+    hiddenInput.focus();
+  }
 
   // Remove submitWord call here; only use handleWordSubmission for submitBtn
   submitBtn.addEventListener('click', () => {
@@ -59,7 +64,12 @@ window.addEventListener('DOMContentLoaded', async () => {
   });
 
   const gameContainer = document.querySelector('.game-container');
-  gameContainer.addEventListener('click', () => hiddenInput.focus());
+  gameContainer.addEventListener('click', () => {
+    // Prevent keyboard from opening on mobile
+    if (!/Mobi|Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+      hiddenInput.focus();
+    }
+  });
 
   addHoneycombClickListener({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
 
@@ -70,6 +80,12 @@ window.addEventListener('DOMContentLoaded', async () => {
     const data = await fetchBeeLetters();
     beeDataRef.value = data;
     renderHoneycomb(data.center_letter, data.outer_letters);
+    // Set logo-date from globalCurrentDate
+    const logoDateEl = document.querySelector('.logo-date');
+    if (logoDateEl && globalCurrentDate) {
+      // Format YYYYMMDD as YYYY-MM-DD
+      logoDateEl.textContent = `${globalCurrentDate.slice(0,4)}-${globalCurrentDate.slice(4,6)}-${globalCurrentDate.slice(6,8)}`;
+    }
   } catch (e) {
     console.error('Error fetching bee letters:', e); // Log the error for debugging
     beeDataRef.value = { center_letter: 'A', outer_letters: ['B','C','D','E','F','G'] };
@@ -217,8 +233,8 @@ const baseUrl = isLocal
 async function fetchBeeLetters() {
   const datesResp = await fetch(baseUrl + "dates.json");
   const datesData = await datesResp.json();
-  const currentDate = datesData.current_date;
-  const beeDataUrl = baseUrl + `bee_${currentDate}.json`;
+  globalCurrentDate = datesData.current_date;
+  const beeDataUrl = baseUrl + `bee_${globalCurrentDate}.json`;
   const beeResp = await fetch(beeDataUrl);
   const beeData = await beeResp.json();
   return beeData;
