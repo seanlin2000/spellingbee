@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 
+html, body, .game-container {
+  touch-action: manipulation;
+}
+
 body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
