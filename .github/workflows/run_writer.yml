@@ -2,7 +2,7 @@ name: Run writer.py every 2 hours
 
 on:
   schedule:
-    - cron: '0 */2 * * *' # Runs every 2 hours (UTC)
+    - cron: '0 */12 * * *' # Runs every 2 hours (UTC)
   workflow_dispatch:
 
 jobs:
@@ -23,5 +23,6 @@ jobs:
 
       - name: Run writer.py
         env:
-            GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          PYTHONPATH: ${{ github.workspace }}
+          TOKEN_GITHUB: ${{ secrets.TOKEN_GITHUB }}
         run: python python/writer.py
