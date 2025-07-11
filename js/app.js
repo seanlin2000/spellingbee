@@ -45,9 +45,13 @@ const beeDataRef = { value: null };
 
 window.addEventListener('DOMContentLoaded', async () => {
   // Only focus hiddenInput on desktop devices
-  console.log(navigator.userAgent)
-  if (!/Mobi|Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+  if (!isMobile) {
     hiddenInput.focus();
+  } else {
+    // On mobile, make input completely unfocusable
+    hiddenInput.setAttribute('tabindex', '-1');
+    hiddenInput.blur();
   }
 
   // Remove submitWord call here; only use handleWordSubmission for submitBtn
@@ -64,10 +68,14 @@ window.addEventListener('DOMContentLoaded', async () => {
   });
 
   const gameContainer = document.querySelector('.game-container');
-  gameContainer.addEventListener('click', () => {
+  gameContainer.addEventListener('click', (e) => {
     // Prevent keyboard from opening on mobile
-    if (!/Mobi|Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
+    if (!isMobile) {
       hiddenInput.focus();
+    } else {
+      hiddenInput.blur();
+      e.preventDefault();
+      return false;
     }
   });
 
