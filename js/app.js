@@ -49,6 +49,8 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Only focus hiddenInput on desktop devices
   setInputFocus(hiddenInput);
 
+  console.log("Score is", currentScore)
+
   // Remove submitWord call here; only use handleWordSubmission for submitBtn
   submitBtn.addEventListener('click', () => {
     setCurrentWord(hiddenInput.value.trim().toUpperCase());
@@ -57,10 +59,12 @@ window.addEventListener('DOMContentLoaded', async () => {
   });
   deleteBtn.addEventListener('click', () => {
     deleteChar({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
+    saveGameState();
   });
   shuffleBtn.addEventListener('click', () => {
     const honeycomb = document.querySelector('.honeycomb');
     handleShuffleClick({ beeData: beeDataRef, renderHoneycomb, honeycomb });
+    saveGameState();
   });
 
   const gameContainer = document.querySelector('.game-container');
