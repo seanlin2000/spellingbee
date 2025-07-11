@@ -12,3 +12,8 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+
+token.json
+credentials.json
+service_account.json
+token.txt

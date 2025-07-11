@@ -1,6 +1,12 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 import json
+
+import sys
+sys.path.append(os.path.dirname(__file__))
+from calculator import compute_score, compute_rankings
+
 
 def fetch_spelling_bee():
     URL = 'https://www.nytimes.com/puzzles/spelling-bee'
@@ -38,9 +44,22 @@ def fetch_spelling_bee():
         'pangrams': pangrams
     }
 
-if __name__ == '__main__':
+def compile_info():
     info = fetch_spelling_bee()
-    print("Center letter:", info['center_letter'])
-    print("Outer letters:", info['outer_letters'])
-    print("Answers:", info['answers'])
-    print("Pangrams:", info['pangrams'])
+    info_dict = {
+        'center_letter': info['center_letter'],
+        'outer_letters': info['outer_letters'],
+        'answers': info['answers'],
+        'pangrams': info['pangrams'],
+    }
+
+    answers = info['answers']
+    pangrams = info['pangrams']
+    max_score = compute_score(answers, pangrams)
+    ranking_scores = compute_rankings(max_score)
+    info_dict.update(ranking_scores)
+    return info_dict
+
+if __name__ == '__main__':
+    info = compile_info()
+    print(info)
