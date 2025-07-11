@@ -7,7 +7,7 @@ export function positionHexagons() {
   const cx = w / 2;
   const cy = h / 2;
   // Distance from center to each hex center
-  const r = w * 0.28; // radius for hex centers
+  const r = w * 0.26; // radius for hex centers
 
   // Angles for 6 outer hexes
   const angles = [270, 330, 30, 90, 150, 210];
