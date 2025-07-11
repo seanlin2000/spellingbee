@@ -29,6 +29,8 @@ function updateCurrentWordDisplay() {
   for (const ch of currentWord) {
     if (validLetters.length && !validLetters.includes(ch)) {
       html += `<span style="color:#bbb">${ch}</span>`;
+    } else if (ch == beeDataRef.value.center_letter.toUpperCase()) {
+      html += `<span style="color:#FFCE1C">${ch}</span>`;
     } else {
       html += `<span style="color:#111">${ch}</span>`;
     }
@@ -47,17 +49,22 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Only focus hiddenInput on desktop devices
   setInputFocus(hiddenInput);
 
+  console.log("Score is", currentScore)
+
   // Remove submitWord call here; only use handleWordSubmission for submitBtn
   submitBtn.addEventListener('click', () => {
     setCurrentWord(hiddenInput.value.trim().toUpperCase());
     handleWordSubmission();
+    saveGameState();
   });
   deleteBtn.addEventListener('click', () => {
     deleteChar({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
+    saveGameState();
   });
   shuffleBtn.addEventListener('click', () => {
     const honeycomb = document.querySelector('.honeycomb');
     handleShuffleClick({ beeData: beeDataRef, renderHoneycomb, honeycomb });
+    saveGameState();
   });
 
   const gameContainer = document.querySelector('.game-container');
@@ -69,7 +76,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   setHeaderDate();
   setupHamburgerMenu();
-
   try {
     const data = await fetchBeeLetters();
     beeDataRef.value = data;
@@ -77,19 +83,47 @@ window.addEventListener('DOMContentLoaded', async () => {
     // Set logo-date from globalCurrentDate
     const logoDateEl = document.querySelector('.logo-date');
     if (logoDateEl && globalCurrentDate) {
-      // Format YYYYMMDD as YYYY-MM-DD
       logoDateEl.textContent = `${globalCurrentDate.slice(0,4)}-${globalCurrentDate.slice(4,6)}-${globalCurrentDate.slice(6,8)}`;
     }
+    // Only restore game state after globalCurrentDate is set
+    restoreGameState();
+    saveGameState();
   } catch (e) {
     console.error('Error fetching bee letters:', e); // Log the error for debugging
     beeDataRef.value = { center_letter: 'A', outer_letters: ['B','C','D','E','F','G'] };
     renderHoneycomb(beeDataRef.value.center_letter, beeDataRef.value.outer_letters);
   }
   positionHexagons();
-
-  // After loading beeDataRef, render the progress bar and update rank UI
-  updateProgressUI(null, false, 0);
+  updateProgressUI(null, false, currentScore);
 });
+
+function restoreGameState() {
+  // Only clear if both storedDate and globalCurrentDate are valid and different
+  const storedDate = sessionStorage.getItem('globalCurrentDate');
+  if (storedDate && globalCurrentDate && storedDate !== globalCurrentDate) {
+    sessionStorage.clear();
+    return;
+  }
+  // Restore state if date matches
+  const score = sessionStorage.getItem('currentScore');
+  if (score !== null) currentScore = JSON.parse(score);
+  const beeData = sessionStorage.getItem('beeDataRef');
+  if (beeData !== null) beeDataRef.value = JSON.parse(beeData);
+  const words = sessionStorage.getItem('foundWords');
+  if (words !== null) {
+    foundWords.length = 0;
+    foundWords.push(...JSON.parse(words));
+  }
+  // Update found words display after restoring
+  updateFoundWordsDisplay();
+}
+
+function saveGameState() {
+  sessionStorage.setItem('currentScore', JSON.stringify(currentScore));
+  sessionStorage.setItem('beeDataRef', JSON.stringify(beeDataRef.value));
+  sessionStorage.setItem('foundWords', JSON.stringify(foundWords));
+  sessionStorage.setItem('globalCurrentDate', globalCurrentDate);
+}
 
 hiddenInput.addEventListener('input', e => {
   setCurrentWord(hiddenInput.value.trim().toUpperCase());
@@ -136,48 +170,45 @@ function handleWordSubmission() {
     return;
   }
   word = capitalizeFirstLetter(word);
-  // Get previous rank before adding word (use score, not foundWords)
   const answers = window.beeDataRef?.value?.answers || [];
   const pangrams = window.beeDataRef?.value?.pangrams || [];
-  // Calculate previous score (before adding this word)
   const prevScore = currentScore;
   const { currRank: prevRank } = findRank(prevScore, answers, pangrams);
-
-  // Compute points for this word
   const points = computeScore([word.toLowerCase()], pangrams);
-  currentScore += points; // Update global score
-
+  currentScore += points;
   foundWords.push(word);
   updateFoundWordsDisplay();
-  // Pangram feedback or random positive feedback or rank up
-  let didPangram = false;
   let feedbackMsg = '';
   if (pangrams.includes(word.toLowerCase())) {
     feedbackMsg = '<strong>Pangram!</strong>';
-    didPangram = true;
     feedbackMsg += ` <span style='color:#222;font-weight:700;'>+${points}</span>`;
     showFeedbackBubble(feedbackMsg);
-    setCurrentWord('');
-    updateCurrentWordDisplay();
-    hiddenInput.value = '';
-    updateProgressUI(null, false, currentScore); // Don't show rank up if pangram
+    updateProgressUI(null, false, currentScore);
+    finalizeSubmission();
     return;
   }
-  setCurrentWord('');
-  updateCurrentWordDisplay();
-  hiddenInput.value = '';
   const didRankUp = updateProgressUI(prevRank, false, currentScore);
   if (didRankUp) {
-    // Show the new rank in bold with exclamation point
     const { currRank } = findRank(currentScore, answers, pangrams);
     feedbackMsg = `<strong>${currRank}</strong>!`;
   } else {
     const feedbacks = ['Great job!', 'Nice!', 'Good!'];
-    const msg = feedbacks[Math.floor(Math.random() * feedbacks.length)];
-    feedbackMsg = msg;
+    feedbackMsg = feedbacks[Math.floor(Math.random() * feedbacks.length)];
   }
   feedbackMsg += ` <span style='color:#222;font-weight:700;'>+${points}</span>`;
   showFeedbackBubble(feedbackMsg);
+  finalizeSubmission();
+}
+
+function updateAfterSubmission() {
+  setCurrentWord('');
+  updateCurrentWordDisplay();
+  hiddenInput.value = '';
+}
+
+function finalizeSubmission() {
+  updateAfterSubmission();
+  saveGameState();
 }
 
 // SHARE BUTTON FUNCTIONALITY
