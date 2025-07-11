@@ -1,0 +1,25 @@
+name: Run writer.py every 2 hours
+
+on:
+  schedule:
+    - cron: '0 */2 * * *' # Runs every 2 hours (UTC)
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run writer.py
+        run: python python/writer.py
