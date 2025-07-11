@@ -1,5 +1,5 @@
 // Game logic for Spelling Bee
-import { positionHexagons, renderHoneycomb, addHoneycombClickListener } from "./honeycomb.js";
+import { positionHexagons, renderHoneycomb, addHoneycombClickListener, setInputFocus } from "./honeycomb.js";
 import { deleteChar, handleShuffleClick } from "./button.js";
 import { setHeaderDate, setupHamburgerMenu } from "./header.js";
 import { foundWords, updateFoundWordsDisplay, showFeedbackBubble } from "./submissions.js";
@@ -45,14 +45,7 @@ const beeDataRef = { value: null };
 
 window.addEventListener('DOMContentLoaded', async () => {
   // Only focus hiddenInput on desktop devices
-  const isMobile = /Mobi|Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-  if (!isMobile) {
-    hiddenInput.focus();
-  } else {
-    // On mobile, make input completely unfocusable
-    hiddenInput.setAttribute('tabindex', '-1');
-    hiddenInput.blur();
-  }
+  setInputFocus(hiddenInput);
 
   // Remove submitWord call here; only use handleWordSubmission for submitBtn
   submitBtn.addEventListener('click', () => {
@@ -68,15 +61,8 @@ window.addEventListener('DOMContentLoaded', async () => {
   });
 
   const gameContainer = document.querySelector('.game-container');
-  gameContainer.addEventListener('click', (e) => {
-    // Prevent keyboard from opening on mobile
-    if (!isMobile) {
-      hiddenInput.focus();
-    } else {
-      hiddenInput.blur();
-      e.preventDefault();
-      return false;
-    }
+  gameContainer.addEventListener('click', () => {
+    setInputFocus(hiddenInput);
   });
 
   addHoneycombClickListener({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput });
