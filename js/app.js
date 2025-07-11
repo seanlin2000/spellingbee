@@ -1,11 +1,9 @@
 // Game logic for Spelling Bee
-import { positionHexagons, fetchBeeLetters, renderHoneycomb, addHoneycombClickListener } from "./honeycomb.js";
+import { positionHexagons, renderHoneycomb, addHoneycombClickListener } from "./honeycomb.js";
 import { deleteChar, handleShuffleClick } from "./button.js";
-import {
-  setHeaderDate, setupHamburgerMenu
-} from "./header.js";
+import { setHeaderDate, setupHamburgerMenu } from "./header.js";
 import { foundWords, updateFoundWordsDisplay, showFeedbackBubble } from "./submissions.js";
-import { computeScore, computeRankings, findRank, computePointsToNextRank } from "./scoring.js";
+import { computeScore, findRank } from "./scoring.js";
 import { updateProgressUI } from "./progress-bar.js";
 
 let currentWord = '';
@@ -14,7 +12,7 @@ const hiddenInput = document.querySelector('.word-input');
 const deleteBtn = document.querySelector('.delete-btn');
 const submitBtn = document.querySelector('.submit-btn');
 const shuffleBtn = document.querySelector('.shuffle-btn');
-let currentScore = 0; // Global tracker for the user's score
+let currentScore = 0; // Globasl tracker for the user's score
 
 function updateCurrentWordDisplay() {
   // Get all valid letters from honeycomb (center + outer)
@@ -210,3 +208,18 @@ if (shareBtn) {
 
 // Expose beeDataRef globally for header.js popup access
 window.beeDataRef = beeDataRef;
+
+const isLocal = location.hostname === "localhost";
+const baseUrl = isLocal
+  ? "../sample_data/"
+  : "https://seanlin2000.github.io/spellingbee/data/";
+
+async function fetchBeeLetters() {
+  const datesResp = await fetch(baseUrl + "dates.json");
+  const datesData = await datesResp.json();
+  const currentDate = datesData.current_date;
+  const beeDataUrl = baseUrl + `bee_${currentDate}.json`;
+  const beeResp = await fetch(beeDataUrl);
+  const beeData = await beeResp.json();
+  return beeData;
+}

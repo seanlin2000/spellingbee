@@ -23,12 +23,7 @@ export function positionHexagons() {
     hexes[i].style.top = y + 'px';
   }
 }
-export async function fetchBeeLetters() {
-  const url = '/bee';
-  const resp = await fetch(url);
-  if (!resp.ok) throw new Error('Failed to fetch bee letters');
-  return await resp.json();
-}
+
 export function renderHoneycomb(center, outers) {
   const honeycomb = document.querySelector('.honeycomb');
   honeycomb.innerHTML = '';
