@@ -7,9 +7,7 @@ from zoneinfo import ZoneInfo
 
 import click
 
-import sys
-sys.path.append(os.path.dirname(__file__))
-from scraper import compile_info
+from python.scraper import compile_info
 
 def read_json_github(repo, path, token):
     """Read a JSON file from a GitHub repository."""

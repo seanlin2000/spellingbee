@@ -65,7 +65,7 @@ def compute_rankings(max_score):
     return ranking_scores
 
 if __name__ == '__main__':
-    from scraper import fetch_spelling_bee
+    from python.scraper import fetch_spelling_bee
     info = fetch_spelling_bee()
     max_score = compute_score(info['answers'], info['pangrams'])
     print("Max Score:", max_score)

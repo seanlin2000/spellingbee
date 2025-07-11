@@ -5,7 +5,7 @@ import json
 
 import sys
 sys.path.append(os.path.dirname(__file__))
-from calculator import compute_score, compute_rankings
+from python.calculator import compute_score, compute_rankings
 
 
 def fetch_spelling_bee():

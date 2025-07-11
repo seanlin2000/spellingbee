@@ -3,7 +3,7 @@ import { positionHexagons, renderHoneycomb, addHoneycombClickListener } from "./
 import { deleteChar, handleShuffleClick } from "./button.js";
 import { setHeaderDate, setupHamburgerMenu } from "./header.js";
 import { foundWords, updateFoundWordsDisplay, showFeedbackBubble } from "./submissions.js";
-import { computeScore, computeRankings, findRank, computePointsToNextRank } from "./scoring.js";
+import { computeScore, findRank } from "./scoring.js";
 import { updateProgressUI } from "./progress-bar.js";
 
 let currentWord = '';
@@ -211,7 +211,7 @@ window.beeDataRef = beeDataRef;
 
 const isLocal = location.hostname === "localhost";
 const baseUrl = isLocal
-  ? "../data/"
+  ? "../sample_data/"
   : "https://seanlin2000.github.io/spellingbee/data/";
 
 async function fetchBeeLetters() {
