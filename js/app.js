@@ -1,9 +1,7 @@
 // Game logic for Spelling Bee
 import { positionHexagons, renderHoneycomb, addHoneycombClickListener } from "./honeycomb.js";
 import { deleteChar, handleShuffleClick } from "./button.js";
-import {
-  setHeaderDate, setupHamburgerMenu
-} from "./header.js";
+import { setHeaderDate, setupHamburgerMenu } from "./header.js";
 import { foundWords, updateFoundWordsDisplay, showFeedbackBubble } from "./submissions.js";
 import { computeScore, computeRankings, findRank, computePointsToNextRank } from "./scoring.js";
 import { updateProgressUI } from "./progress-bar.js";
@@ -14,7 +12,7 @@ const hiddenInput = document.querySelector('.word-input');
 const deleteBtn = document.querySelector('.delete-btn');
 const submitBtn = document.querySelector('.submit-btn');
 const shuffleBtn = document.querySelector('.shuffle-btn');
-let currentScore = 0; // Global tracker for the user's score
+let currentScore = 0; // Globasl tracker for the user's score
 
 function updateCurrentWordDisplay() {
   // Get all valid letters from honeycomb (center + outer)
@@ -213,7 +211,7 @@ window.beeDataRef = beeDataRef;
 
 const isLocal = location.hostname === "localhost";
 const baseUrl = isLocal
-  ? "../static/data/"
+  ? "../data/"
   : "https://seanlin2000.github.io/spellingbee/data/";
 
 async function fetchBeeLetters() {
