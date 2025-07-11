@@ -62,8 +62,9 @@ def create_dates_dict(date):
 
 @click.command()
 @click.option("--overwrite", help="Overwrite file", default=False)
-def run(overwrite):
-    TOKEN = get_github_token()
+@click.option("--local", help="Running locally or on github", default=False)
+def run(overwrite, local):
+    TOKEN = get_github_token() if local else os.environ["TOKEN_GITHUB"]
     REPO = "seanlin2000/spellingbee"
     print(TOKEN)
     pacific_now = datetime.now(ZoneInfo("America/Los_Angeles"))
