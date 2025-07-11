@@ -51,6 +51,16 @@ export function renderHoneycomb(center, outers) {
   positionHexagons();
 }
 
+// Set focus/blur on hidden input based on device type
+export function setInputFocus(hiddenInput) {
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+  if (!isMobile) {
+    hiddenInput.focus();
+  } else {
+    hiddenInput.blur();
+  }
+}
+
 // Handles clicks on honeycomb hexes to add letters to the current word
 export function addHoneycombClickListener({ getCurrentWord, setCurrentWord, updateCurrentWordDisplay, hiddenInput }) {
   const honeycomb = document.querySelector('.honeycomb');
@@ -61,7 +71,7 @@ export function addHoneycombClickListener({ getCurrentWord, setCurrentWord, upda
       setCurrentWord(current + hex.dataset.letter);
       hiddenInput.value = getCurrentWord();
       updateCurrentWordDisplay();
-      hiddenInput.focus();
+      setInputFocus(hiddenInput);
     }
   });
 }
