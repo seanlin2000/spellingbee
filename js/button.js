@@ -7,7 +7,11 @@ export function deleteChar({ getCurrentWord, setCurrentWord, updateCurrentWordDi
     setCurrentWord(word.slice(0, -1));
     hiddenInput.value = getCurrentWord();
     updateCurrentWordDisplay();
-    hiddenInput.focus();
+    // Only focus input if NOT on Chrome mobile
+    const isMobileChrome = /Mobi|Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) && /Chrome/i.test(navigator.userAgent);
+    if (!isMobileChrome) {
+      hiddenInput.focus();
+    }
   }
 }
 
