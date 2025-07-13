@@ -222,14 +222,11 @@ if (shareBtn) {
     const score = typeof currentScore === 'number' ? currentScore : 0;
     // Get found words from the JS state
     let words = foundWords;
-    // Sort by length descending, pick top 3
-    const topWords = words.sort((a, b) => b.length - a.length).slice(0, 3);
-    const topWordsStr = topWords.join(', ') || 'N/A';
     // Get today's date
     const today = new Date();
     const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     // Compose message
-    const shareText = `I hit ${rank} rank with a score of ${score} on NYT Spelling Bee today! I found ${words.length} words. My most impressive words were ${topWordsStr}. (${dateStr})`;
+    const shareText = `I hit ${rank} rank with a score of ${score} on NYT Spelling Bee today! I found ${words.length} words. (${dateStr})`;
     try {
       await navigator.clipboard.writeText(shareText);
       shareBtn.textContent = 'Copied!';
