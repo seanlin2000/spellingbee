@@ -14,6 +14,7 @@ const submitBtn = document.querySelector('.submit-btn');
 const shuffleBtn = document.querySelector('.shuffle-btn');
 let currentScore = 0; // Globasl tracker for the user's score
 let globalCurrentDate = null;
+let yesterdayBeeDataRef = { value: null };
 
 function updateCurrentWordDisplay() {
   // Get all valid letters from honeycomb (center + outer)
@@ -105,6 +106,8 @@ function restoreGameState() {
   if (score !== null) currentScore = JSON.parse(score);
   const beeData = sessionStorage.getItem('beeDataRef');
   if (beeData !== null) beeDataRef.value = JSON.parse(beeData);
+  const yesterdayBeeData = sessionStorage.getItem('yesterdayBeeDataRef');
+  if (yesterdayBeeData !== null) yesterdayBeeDataRef.value = JSON.parse(yesterdayBeeData);
   const words = sessionStorage.getItem('foundWords');
   if (words !== null) {
     foundWords.length = 0;
@@ -117,6 +120,7 @@ function restoreGameState() {
 function saveGameState() {
   sessionStorage.setItem('currentScore', JSON.stringify(currentScore));
   sessionStorage.setItem('beeDataRef', JSON.stringify(beeDataRef.value));
+  sessionStorage.setItem('yesterdayBeeDataRef', JSON.stringify(yesterdayBeeDataRef.value));
   sessionStorage.setItem('foundWords', JSON.stringify(foundWords));
   sessionStorage.setItem('globalCurrentDate', globalCurrentDate);
 }
@@ -238,6 +242,7 @@ if (shareBtn) {
 
 // Expose beeDataRef globally for header.js popup access
 window.beeDataRef = beeDataRef;
+window.yesterdayBeeDataRef = yesterdayBeeDataRef
 
 const isLocal = location.hostname === "localhost";
 const baseUrl = isLocal
@@ -248,8 +253,29 @@ async function fetchBeeLetters() {
   const datesResp = await fetch(baseUrl + "dates.json");
   const datesData = await datesResp.json();
   globalCurrentDate = datesData.current_date;
+  // Find yesterday's date
+  let yesterdayDate = null;
+  if (Array.isArray(datesData.valid_dates)) {
+    // Sort dates descending, find the largest < globalCurrentDate
+    const sortedDates = datesData.valid_dates.filter(d => d < globalCurrentDate).sort((a, b) => b.localeCompare(a));
+    if (sortedDates.length > 0) {
+      yesterdayDate = sortedDates[0];
+    }
+  }
+  // Fetch today's bee data
   const beeDataUrl = baseUrl + `bee_${globalCurrentDate}.json`;
   const beeResp = await fetch(beeDataUrl);
   const beeData = await beeResp.json();
+  // Fetch yesterday's bee data if available
+  if (yesterdayDate) {
+    const yesterdayBeeDataUrl = baseUrl + `bee_${yesterdayDate}.json`;
+    try {
+      const yesterdayBeeResp = await fetch(yesterdayBeeDataUrl);
+      const yesterdayBeeData = await yesterdayBeeResp.json();
+      yesterdayBeeDataRef.value = yesterdayBeeData;
+    } catch (e) {
+      yesterdayBeeDataRef.value = null;
+    }
+  }
   return beeData;
 }

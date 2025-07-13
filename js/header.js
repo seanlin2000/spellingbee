@@ -84,6 +84,13 @@ export function setupHamburgerMenu() {
   document.querySelector('.stats-item')?.addEventListener('click', () => {
     dropdown.classList.remove('show');
   });
+  document.querySelector('.answers-item')?.addEventListener('click', () => {
+    const yesterdayData = window.yesterdayBeeDataRef?.value;
+    if (yesterdayData && Array.isArray(yesterdayData.answers)) {
+      showAnswersPopup(yesterdayData);
+    }
+    dropdown.classList.remove('show');
+  });
 }
 
 // Shared popup helper
@@ -190,8 +197,8 @@ function showRulesPopup() {
     const wordRules = [
       'Words must contain at least 4 letters.',
       'Words must include the center letter.',
-      'Our word list does not include words that are obscure, hyphenated, or proper nouns.',
-      'No cussing either, sorry.',
+      'Does not include words that are obscure, hyphenated, or proper nouns.',
+      'No swear words',
       'Letters can be used more than once.'
     ];
     const wordRulesList = document.createElement('ul');
@@ -243,7 +250,7 @@ function showRulesPopup() {
     wrapper.appendChild(newPuzzle);
 
     showPopup({
-      heading: 'How to Play Spelling Bee',
+      heading: 'How to Play FreeBee',
       content: wrapper,
       contentType: 'node'
     });
@@ -276,5 +283,53 @@ function showRankingsPopup(rankings) {
   wrapper.appendChild(intro);
   wrapper.appendChild(list);
   showPopup({ heading: 'Rankings', content: wrapper, contentType: 'node' });
+}
+
+function showAnswersPopup(yesterdayData) {
+  // Create wrapper for popup
+  const wrapper = document.createElement('div');
+  // Title sentence
+  const subtitle = document.createElement('div');
+  subtitle.textContent = "Here are the answers to yesterday's FreeBee";
+  subtitle.style.marginBottom = '1.1em';
+  subtitle.style.fontWeight = '400';
+  subtitle.style.fontSize = '1.05rem';
+  subtitle.style.fontFamily = "'Inter', 'Segoe UI', 'Arial', 'sans-serif'";
+  wrapper.appendChild(subtitle);
+  // Scrollable answers list
+  const listContainer = document.createElement('div');
+  listContainer.style.maxHeight = '320px';
+  listContainer.style.overflowY = 'auto';
+  listContainer.style.borderRadius = '8px';
+  listContainer.style.background = '#f9f9f9';
+  listContainer.style.padding = '0.5em 0.7em';
+  listContainer.style.boxShadow = '0 2px 8px rgba(0,0,0,0.07)';
+  listContainer.style.marginBottom = '0.5em';
+  // Answers as a list
+  const ul = document.createElement('ul');
+  ul.style.listStyle = 'none';
+  ul.style.padding = 0;
+  ul.style.margin = 0;
+  ul.style.fontSize = '1.08rem';
+  ul.style.fontFamily = "'Montserrat', 'Segoe UI', 'Arial', 'sans-serif'";
+  const pangrams = Array.isArray(yesterdayData.pangrams) ? yesterdayData.pangrams.map(p => p.toLowerCase()) : [];
+  yesterdayData.answers.forEach(ans => {
+    const li = document.createElement('li');
+    li.textContent = ans;
+    if (pangrams.includes(ans.toLowerCase())) {
+      li.textContent += ' (Pangram)';
+      li.style.fontWeight = '700';
+      li.style.color = '#FFCE1C';
+    }
+    li.style.marginBottom = '0.3em';
+    ul.appendChild(li);
+  });
+  listContainer.appendChild(ul);
+  wrapper.appendChild(listContainer);
+  showPopup({
+    heading: "Yesterday's Answers",
+    content: wrapper,
+    contentType: 'node'
+  });
 }
 
