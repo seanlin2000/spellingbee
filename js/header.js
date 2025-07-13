@@ -91,6 +91,66 @@ export function setupHamburgerMenu() {
     }
     dropdown.classList.remove('show');
   });
+  document.querySelector('.reset-item')?.addEventListener('click', () => {
+    showResetPopup();
+    dropdown.classList.remove('show');
+  });
+}
+
+function showResetPopup() {
+  const wrapper = document.createElement('div');
+  const msg = document.createElement('div');
+  msg.textContent = 'Are you sure you want to reset your progress? This will clear all saved data for this puzzle.';
+  msg.style.marginBottom = '1.2em';
+  msg.style.fontWeight = '400';
+  msg.style.fontSize = '1.05rem';
+  msg.style.fontFamily = "'Inter', 'Segoe UI', 'Arial', 'sans-serif'";
+  wrapper.appendChild(msg);
+
+  const btnRow = document.createElement('div');
+  btnRow.style.display = 'flex';
+  btnRow.style.justifyContent = 'center';
+  btnRow.style.gap = '1.2em';
+
+  const yesBtn = document.createElement('button');
+  yesBtn.textContent = 'Yes';
+  yesBtn.style.background = '#FFCE1C';
+  yesBtn.style.color = '#222';
+  yesBtn.style.fontWeight = '600';
+  yesBtn.style.fontSize = '1.08rem';
+  yesBtn.style.border = 'none';
+  yesBtn.style.borderRadius = '7px';
+  yesBtn.style.padding = '0.5em 1.3em';
+  yesBtn.style.cursor = 'pointer';
+  yesBtn.addEventListener('click', () => {
+    localStorage.clear();
+    document.querySelectorAll('.popup-overlay').forEach(e => e.remove());
+    location.reload();
+  });
+
+  const noBtn = document.createElement('button');
+  noBtn.textContent = 'No';
+  noBtn.style.background = '#eee';
+  noBtn.style.color = '#222';
+  noBtn.style.fontWeight = '500';
+  noBtn.style.fontSize = '1.08rem';
+  noBtn.style.border = 'none';
+  noBtn.style.borderRadius = '7px';
+  noBtn.style.padding = '0.5em 1.3em';
+  noBtn.style.cursor = 'pointer';
+  noBtn.addEventListener('click', () => {
+    document.querySelectorAll('.popup-overlay').forEach(e => e.remove());
+  });
+
+  btnRow.appendChild(yesBtn);
+  btnRow.appendChild(noBtn);
+  wrapper.appendChild(btnRow);
+
+  showPopup({
+    heading: 'Reset Progress',
+    content: wrapper,
+    contentType: 'node'
+  });
 }
 
 // Shared popup helper

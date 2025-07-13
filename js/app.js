@@ -96,19 +96,20 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 function restoreGameState() {
   // Only clear if both storedDate and globalCurrentDate are valid and different
-  const storedDate = sessionStorage.getItem('globalCurrentDate');
+  const storedDate = localStorage.getItem('globalCurrentDate');
   if (storedDate && globalCurrentDate && storedDate !== globalCurrentDate) {
-    sessionStorage.clear();
+    localStorage.clear();
     return;
   }
   // Restore state if date matches
-  const score = sessionStorage.getItem('currentScore');
+  const score = localStorage.getItem('currentScore');
+  console.log(score)
   if (score !== null) currentScore = JSON.parse(score);
-  const beeData = sessionStorage.getItem('beeDataRef');
+  const beeData = localStorage.getItem('beeDataRef');
   if (beeData !== null) beeDataRef.value = JSON.parse(beeData);
-  const yesterdayBeeData = sessionStorage.getItem('yesterdayBeeDataRef');
+  const yesterdayBeeData = localStorage.getItem('yesterdayBeeDataRef');
   if (yesterdayBeeData !== null) yesterdayBeeDataRef.value = JSON.parse(yesterdayBeeData);
-  const words = sessionStorage.getItem('foundWords');
+  const words = localStorage.getItem('foundWords');
   if (words !== null) {
     foundWords.length = 0;
     foundWords.push(...JSON.parse(words));
@@ -118,11 +119,11 @@ function restoreGameState() {
 }
 
 function saveGameState() {
-  sessionStorage.setItem('currentScore', JSON.stringify(currentScore));
-  sessionStorage.setItem('beeDataRef', JSON.stringify(beeDataRef.value));
-  sessionStorage.setItem('yesterdayBeeDataRef', JSON.stringify(yesterdayBeeDataRef.value));
-  sessionStorage.setItem('foundWords', JSON.stringify(foundWords));
-  sessionStorage.setItem('globalCurrentDate', globalCurrentDate);
+  localStorage.setItem('currentScore', JSON.stringify(currentScore));
+  localStorage.setItem('beeDataRef', JSON.stringify(beeDataRef.value));
+  localStorage.setItem('yesterdayBeeDataRef', JSON.stringify(yesterdayBeeDataRef.value));
+  localStorage.setItem('foundWords', JSON.stringify(foundWords));
+  localStorage.setItem('globalCurrentDate', globalCurrentDate);
 }
 
 hiddenInput.addEventListener('input', e => {
