@@ -302,7 +302,7 @@ function showRulesPopup() {
 
     // Section 5: New puzzle info
     const newPuzzle = document.createElement('div');
-    newPuzzle.textContent = 'New puzzles are released daily at 4 a.m. ET.';
+    newPuzzle.textContent = 'New puzzles are released daily at 5 a.m. ET.';
     newPuzzle.style.margin = '1.2em 0 0 0';
     newPuzzle.style.fontWeight = '400';
     newPuzzle.style.fontSize = '1.05rem';
