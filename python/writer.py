@@ -71,21 +71,21 @@ def run(overwrite, local):
     date = pacific_now.strftime("%Y%m%d")
     json_path = f"data/bee_{date}.json"
     print(date, json_path)
-    bee_data = compile_info()
     data_exists = github_file_exists(REPO, json_path, TOKEN)
     if (data_exists and overwrite) or (not data_exists):
+        bee_data = compile_info()
         write_json_github(REPO, json_path, bee_data, TOKEN, commit_message=f"Added game data for {date}")
     
-    date_path = "data/dates.json"
-    date_path_exists = github_file_exists(REPO, date_path, TOKEN)
-    if date_path_exists:
-        dates_data = read_json_github(REPO, date_path, TOKEN)
-        dates_data["current_date"] = date
-        if date not in dates_data["valid_dates"]:
-            dates_data["valid_dates"].append(date)
-    else:
-        dates_data = create_dates_dict(date)
-    write_json_github(REPO, date_path, dates_data, TOKEN, commit_message="Update dates.json")
+        date_path = "data/dates.json"
+        date_path_exists = github_file_exists(REPO, date_path, TOKEN)
+        if date_path_exists:
+            dates_data = read_json_github(REPO, date_path, TOKEN)
+            dates_data["current_date"] = date
+            if date not in dates_data["valid_dates"]:
+                dates_data["valid_dates"].append(date)
+        else:
+            dates_data = create_dates_dict(date)
+        write_json_github(REPO, date_path, dates_data, TOKEN, commit_message="Update dates.json")
 
 if __name__ == '__main__':
     run()
