@@ -2,6 +2,8 @@ import os
 import requests
 from bs4 import BeautifulSoup
 import json
+import time
+import random
 
 import sys
 sys.path.append(os.path.dirname(__file__))
@@ -9,6 +11,10 @@ from python.calculator import compute_score, compute_rankings
 
 
 def fetch_spelling_bee():
+    # Add random delay between 0 and 40 minutes (0-2400 seconds)
+    delay = random.uniform(0, 2400)
+    print(f"Sleeping for {delay:.1f} seconds before visiting NYT Spelling Bee...")
+    time.sleep(delay)
     URL = 'https://www.nytimes.com/puzzles/spelling-bee'
     HEADERS = {'User-Agent': 'Mozilla/5.0'}
     resp = requests.get(URL, headers=HEADERS)
