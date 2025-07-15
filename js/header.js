@@ -48,12 +48,22 @@ export function setupHamburgerMenu() {
   const hintBtn = document.querySelector('.hint-item');
   if (hintBtn) {
     hintBtn.addEventListener('click', () => {
-      // Use Pacific Time for the date
-      const now = new Date();
-      const yyyy = now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles', year: 'numeric' });
-      const mm = now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles', month: '2-digit' });
-      const dd = now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles', day: '2-digit' });
-      const url = `https://www.nytimes.com/${yyyy}/${mm}/${dd}/crosswords/spelling-bee-forum.html`;
+      // Use globalCurrentDate from app.js if available
+      let dateStr = window.globalCurrentDate;
+      let yyyy, mm, dd;
+      console.log(dateStr)
+      if (dateStr && dateStr.length === 8) {
+        yyyy = dateStr.slice(0, 4);
+        mm = dateStr.slice(4, 6);
+        dd = dateStr.slice(6, 8);
+      } else {
+        // fallback to now if globalCurrentDate is not available
+        const now = new Date();
+        yyyy = now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles', year: 'numeric' });
+        mm = now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles', month: '2-digit' });
+        dd = now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles', day: '2-digit' });
+      }
+      const url = `https://www.nytimes.com/${yyyy}/${mm}/${dd}/crosswords/spelling-bee-forum.html#commentsContainer`;
       window.open(url, '_blank');
       dropdown.classList.remove('show');
     });
@@ -308,6 +318,15 @@ function showRulesPopup() {
     newPuzzle.style.fontSize = '1.05rem';
     newPuzzle.style.fontFamily = "'Inter', 'Segoe UI', 'Arial', 'sans-serif'";
     wrapper.appendChild(newPuzzle);
+
+        // Section 5: New puzzle info
+    const incognito = document.createElement('div');
+    incognito.textContent = 'Warning: Incognito does not save game state';
+    incognito.style.margin = '1.2em 0 0 0';
+    incognito.style.fontWeight = '700';
+    incognito.style.fontSize = '1.05rem';
+    incognito.style.fontFamily = "'Inter', 'Segoe UI', 'Arial', 'sans-serif'";
+    wrapper.appendChild(incognito);
 
     showPopup({
       heading: 'How to Play FreeBee',

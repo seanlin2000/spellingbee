@@ -8,7 +8,12 @@ export let foundWords = [];
 export function updateFoundWordsDisplay() {
   if (!foundWordsCount || !foundWordsList) return;
   foundWordsCount.textContent = `You have found ${foundWords.length} word${foundWords.length === 1 ? '' : 's'}`;
-  foundWordsList.innerHTML = foundWords.map(w => `<div>${w}</div>`).join('');
+  // Get pangrams from window.beeDataRef if available
+  const pangrams = (window.beeDataRef?.value?.pangrams || []).map(p => p.toLowerCase());
+  foundWordsList.innerHTML = foundWords.map(w => {
+    const isPangram = pangrams.includes(w.toLowerCase());
+    return `<div${isPangram ? ' style="color:#FFCE1C;font-weight:700;"' : ''}>${w}</div>`;
+  }).join('');
 }
 
 if (foundWordsToggle) {
