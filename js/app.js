@@ -156,18 +156,22 @@ function handleWordSubmission() {
   const center = beeDataRef.value?.center_letter?.toUpperCase();
   if (word.length < 4) {
     showFeedbackBubble('Too short');
+    setTimeout(updateAfterSubmission, 500);
     return;
   }
   if (!word.includes(center)) {
     showFeedbackBubble('Missing center letter');
+    setTimeout(updateAfterSubmission, 500);
     return;
   }
   if (!isValidAnswer(word)) {
     showFeedbackBubble('Not in word list');
+    setTimeout(updateAfterSubmission, 500);
     return;
   }
   if (foundWords.includes(capitalizeFirstLetter(word))) {
     showFeedbackBubble('Already found');
+    setTimeout(updateAfterSubmission, 500);
     return;
   }
   word = capitalizeFirstLetter(word);

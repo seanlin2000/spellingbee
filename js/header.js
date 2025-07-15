@@ -63,7 +63,7 @@ export function setupHamburgerMenu() {
         mm = now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles', month: '2-digit' });
         dd = now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles', day: '2-digit' });
       }
-      const url = `https://www.nytimes.com/${yyyy}/${mm}/${dd}/crosswords/spelling-bee-forum.html#commentsContainer`;
+      const url = `https://www.nytimes.com/${yyyy}/${mm}/${dd}/crosswords/spelling-bee-forum.html`;
       window.open(url, '_blank');
       dropdown.classList.remove('show');
     });
