@@ -240,7 +240,8 @@ if (shareBtn) {
 
 // Expose beeDataRef globally for header.js popup access
 window.beeDataRef = beeDataRef;
-window.yesterdayBeeDataRef = yesterdayBeeDataRef
+window.yesterdayBeeDataRef = yesterdayBeeDataRef;
+window.globalCurrentDate = globalCurrentDate;
 
 const isLocal = location.hostname === "localhost";
 const baseUrl = isLocal
@@ -251,6 +252,7 @@ async function fetchBeeLetters() {
   const datesResp = await fetch(baseUrl + "dates.json");
   const datesData = await datesResp.json();
   globalCurrentDate = datesData.current_date;
+  window.globalCurrentDate = globalCurrentDate; // Ensure window is updated after fetch
   // Find yesterday's date
   let yesterdayDate = null;
   if (Array.isArray(datesData.valid_dates)) {
