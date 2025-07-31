@@ -49,6 +49,8 @@ export function renderHoneycomb(center, outers) {
     honeycomb.appendChild(div);
   }
   positionHexagons();
+  // Add touch feedback after hexagons are created
+  addHexTouchFeedback();
 }
 
 // Set focus/blur on hidden input based on device type
@@ -98,4 +100,5 @@ function addHexTouchFeedback() {
   });
 }
 
-window.addEventListener('DOMContentLoaded', addHexTouchFeedback);
+// Export the function so it can be called after hexagons are created
+export { addHexTouchFeedback };
