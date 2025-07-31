@@ -1,6 +1,7 @@
 import base64
 import json
 import os
+import sys
 import requests
 from datetime import datetime
 from zoneinfo import ZoneInfo
@@ -63,7 +64,8 @@ def create_dates_dict(date):
 @click.command()
 @click.option("--overwrite", help="Overwrite file", default=False)
 @click.option("--local", help="Running locally or on github", default=False)
-def run(overwrite, local):
+@click.option("--delay", help="Time Delay", default=-1)
+def run(overwrite, local, delay):
     TOKEN = get_github_token() if local else os.environ["TOKEN_GITHUB"]
     REPO = "seanlin2000/spellingbee"
     print(TOKEN)
@@ -73,7 +75,7 @@ def run(overwrite, local):
     print(date, json_path)
     data_exists = github_file_exists(REPO, json_path, TOKEN)
     if (data_exists and overwrite) or (not data_exists):
-        bee_data = compile_info()
+        bee_data = compile_info(delay)
         write_json_github(REPO, json_path, bee_data, TOKEN, commit_message=f"Added game data for {date}")
     
         date_path = "data/dates.json"

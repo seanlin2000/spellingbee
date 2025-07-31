@@ -4,15 +4,15 @@ from bs4 import BeautifulSoup
 import json
 import time
 import random
-
 import sys
-sys.path.append(os.path.dirname(__file__))
+
 from python.calculator import compute_score, compute_rankings
 
 
-def fetch_spelling_bee():
+def fetch_spelling_bee(delay=-1):
     # Add random delay between 0 and 40 minutes (0-2400 seconds)
-    delay = random.uniform(0, 2400)
+    if delay < 0:
+        delay = random.uniform(0, 2400)
     print(f"Sleeping for {delay:.1f} seconds before visiting NYT Spelling Bee...")
     time.sleep(delay)
     URL = 'https://www.nytimes.com/puzzles/spelling-bee'
@@ -50,8 +50,8 @@ def fetch_spelling_bee():
         'pangrams': pangrams
     }
 
-def compile_info():
-    info = fetch_spelling_bee()
+def compile_info(delay=-1):
+    info = fetch_spelling_bee(delay)
     info_dict = {
         'center_letter': info['center_letter'],
         'outer_letters': info['outer_letters'],

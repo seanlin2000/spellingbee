@@ -71,7 +71,10 @@ body {
   background: #ffe066;
 }
 @media (max-width: 500px) {
-  .word-input { width: 120px; }
+  .word-input { 
+    width: 120px; 
+    pointer-events: none;
+  }
 }
 @media (max-width: 600px) {
   .share-btn {
