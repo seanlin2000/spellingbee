@@ -28,11 +28,15 @@
   font-weight: 700;
   color: #333;
   user-select: none;
-  -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-  outline: none;
   transition: left 0.2s, top 0.2s, background 0.15s, box-shadow 0.15s;
+  touch-action: manipulation;
+  outline: none; /* Remove focus outline */
+  -webkit-user-select: none; /* Prevent text selection */
+}
+
+.hex:focus {
+  outline: none;
 }
 .hex.center { background: #FFCE1C; }
 .hex.center:active {
