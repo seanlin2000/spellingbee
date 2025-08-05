@@ -1,0 +1,44 @@
+{
+  "center_letter": "N",
+  "outer_letters": [
+    "P",
+    "U",
+    "B",
+    "I",
+    "K",
+    "M"
+  ],
+  "answers": [
+    "bumpkin",
+    "bikini",
+    "bunk",
+    "kink",
+    "mini",
+    "minim",
+    "minimum",
+    "mink",
+    "nimbi",
+    "nubbin",
+    "numb",
+    "pink",
+    "pinup",
+    "pippin",
+    "pumpkin",
+    "punk",
+    "unkink",
+    "unpin"
+  ],
+  "pangrams": [
+    "bumpkin"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 4,
+  "Good": 6,
+  "Solid": 12,
+  "Nice": 20,
+  "Great": 32,
+  "Amazing": 40,
+  "Genius": 55,
+  "Queen Bee": 79
+}
