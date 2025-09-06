@@ -1,0 +1,53 @@
+{
+  "center_letter": "V",
+  "outer_letters": [
+    "C",
+    "D",
+    "E",
+    "L",
+    "O",
+    "P"
+  ],
+  "answers": [
+    "codevelop",
+    "codeveloped",
+    "clove",
+    "coevolve",
+    "coevolved",
+    "cove",
+    "delve",
+    "delved",
+    "develop",
+    "developed",
+    "devolve",
+    "devolved",
+    "dove",
+    "evolve",
+    "evolved",
+    "levee",
+    "level",
+    "leveled",
+    "love",
+    "loved",
+    "peeve",
+    "peeved",
+    "veep",
+    "veld",
+    "vole",
+    "voodoo"
+  ],
+  "pangrams": [
+    "codevelop",
+    "codeveloped"
+  ],
+  "Beginner": 0,
+  "Good Start": 3,
+  "Moving Up": 8,
+  "Good": 12,
+  "Solid": 23,
+  "Nice": 39,
+  "Great": 62,
+  "Amazing": 78,
+  "Genius": 109,
+  "Queen Bee": 156
+}
