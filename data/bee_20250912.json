@@ -1,0 +1,45 @@
+{
+  "center_letter": "I",
+  "outer_letters": [
+    "C",
+    "H",
+    "K",
+    "M",
+    "N",
+    "U"
+  ],
+  "answers": [
+    "munchkin",
+    "chic",
+    "chichi",
+    "chick",
+    "chin",
+    "cinch",
+    "cumin",
+    "hick",
+    "inch",
+    "kick",
+    "kimchi",
+    "kink",
+    "mimic",
+    "mini",
+    "minim",
+    "minimum",
+    "mink",
+    "nick",
+    "unkink"
+  ],
+  "pangrams": [
+    "munchkin"
+  ],
+  "Beginner": 0,
+  "Good Start": 1,
+  "Moving Up": 4,
+  "Good": 6,
+  "Solid": 11,
+  "Nice": 19,
+  "Great": 30,
+  "Amazing": 37,
+  "Genius": 52,
+  "Queen Bee": 74
+}
