@@ -1,0 +1,48 @@
+{
+  "center_letter": "V",
+  "outer_letters": [
+    "A",
+    "G",
+    "I",
+    "N",
+    "R",
+    "T"
+  ],
+  "answers": [
+    "aggravating",
+    "gravitating",
+    "arriving",
+    "avatar",
+    "avian",
+    "aviating",
+    "giving",
+    "invariant",
+    "inviting",
+    "navigating",
+    "nirvana",
+    "ravaging",
+    "raving",
+    "titivating",
+    "trivia",
+    "vagina",
+    "vagrant",
+    "vain",
+    "variant",
+    "virgin",
+    "vitiating"
+  ],
+  "pangrams": [
+    "aggravating",
+    "gravitating"
+  ],
+  "Beginner": 0,
+  "Good Start": 3,
+  "Moving Up": 8,
+  "Good": 14,
+  "Solid": 25,
+  "Nice": 42,
+  "Great": 68,
+  "Amazing": 85,
+  "Genius": 118,
+  "Queen Bee": 169
+}
