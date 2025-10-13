@@ -1,0 +1,49 @@
+{
+  "center_letter": "T",
+  "outer_letters": [
+    "C",
+    "D",
+    "I",
+    "M",
+    "O",
+    "Y"
+  ],
+  "answers": [
+    "commodity",
+    "city",
+    "comity",
+    "commit",
+    "coot",
+    "dimity",
+    "ditto",
+    "ditty",
+    "dotty",
+    "idiot",
+    "idiotic",
+    "itty",
+    "mitt",
+    "moot",
+    "motto",
+    "oddity",
+    "omit",
+    "tidy",
+    "timid",
+    "timidity",
+    "toddy",
+    "tomtit",
+    "toot"
+  ],
+  "pangrams": [
+    "commodity"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 5,
+  "Good": 8,
+  "Solid": 16,
+  "Nice": 26,
+  "Great": 42,
+  "Amazing": 52,
+  "Genius": 73,
+  "Queen Bee": 104
+}
