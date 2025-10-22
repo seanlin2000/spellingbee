@@ -1,0 +1,52 @@
+{
+  "center_letter": "O",
+  "outer_letters": [
+    "C",
+    "G",
+    "I",
+    "L",
+    "T",
+    "X"
+  ],
+  "answers": [
+    "toxicologic",
+    "clog",
+    "clot",
+    "cocci",
+    "coil",
+    "colic",
+    "colt",
+    "cool",
+    "coot",
+    "gigolo",
+    "googol",
+    "igloo",
+    "illogic",
+    "loci",
+    "loco",
+    "logic",
+    "logo",
+    "loll",
+    "loot",
+    "lotto",
+    "olio",
+    "toil",
+    "toll",
+    "tool",
+    "toot",
+    "toxic"
+  ],
+  "pangrams": [
+    "toxicologic"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 4,
+  "Good": 7,
+  "Solid": 12,
+  "Nice": 21,
+  "Great": 33,
+  "Amazing": 42,
+  "Genius": 58,
+  "Queen Bee": 83
+}
