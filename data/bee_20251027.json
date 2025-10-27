@@ -1,0 +1,48 @@
+{
+  "center_letter": "D",
+  "outer_letters": [
+    "A",
+    "I",
+    "L",
+    "N",
+    "U",
+    "V"
+  ],
+  "answers": [
+    "individual",
+    "avid",
+    "dial",
+    "dill",
+    "diva",
+    "divan",
+    "dual",
+    "dull",
+    "inlaid",
+    "inland",
+    "invalid",
+    "laid",
+    "land",
+    "laud",
+    "livid",
+    "nada",
+    "naiad",
+    "undid",
+    "unlaid",
+    "valid",
+    "vandal",
+    "vivid"
+  ],
+  "pangrams": [
+    "individual"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 4,
+  "Good": 7,
+  "Solid": 13,
+  "Nice": 22,
+  "Great": 35,
+  "Amazing": 44,
+  "Genius": 62,
+  "Queen Bee": 88
+}
