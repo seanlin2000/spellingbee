@@ -1,0 +1,46 @@
+{
+  "center_letter": "T",
+  "outer_letters": [
+    "C",
+    "E",
+    "I",
+    "M",
+    "V",
+    "Z"
+  ],
+  "answers": [
+    "victimize",
+    "cite",
+    "civet",
+    "emetic",
+    "emit",
+    "evict",
+    "evictee",
+    "item",
+    "itemize",
+    "meet",
+    "memetic",
+    "mete",
+    "mimetic",
+    "mite",
+    "mitt",
+    "teem",
+    "time",
+    "titmice",
+    "victim",
+    "ziti"
+  ],
+  "pangrams": [
+    "victimize"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 4,
+  "Good": 7,
+  "Solid": 12,
+  "Nice": 21,
+  "Great": 33,
+  "Amazing": 42,
+  "Genius": 58,
+  "Queen Bee": 83
+}
