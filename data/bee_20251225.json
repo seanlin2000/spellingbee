@@ -1,0 +1,52 @@
+{
+  "center_letter": "N",
+  "outer_letters": [
+    "O",
+    "P",
+    "X",
+    "E",
+    "H",
+    "I"
+  ],
+  "answers": [
+    "phoenix",
+    "heinie",
+    "hone",
+    "innie",
+    "nene",
+    "neon",
+    "nine",
+    "ninepin",
+    "none",
+    "noon",
+    "nope",
+    "onion",
+    "open",
+    "opine",
+    "opinion",
+    "oxen",
+    "peen",
+    "penne",
+    "peon",
+    "phone",
+    "phono",
+    "pine",
+    "pinion",
+    "pippin",
+    "pone",
+    "xenon"
+  ],
+  "pangrams": [
+    "phoenix"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 5,
+  "Good": 8,
+  "Solid": 14,
+  "Nice": 24,
+  "Great": 38,
+  "Amazing": 47,
+  "Genius": 66,
+  "Queen Bee": 94
+}
