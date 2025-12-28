@@ -1,0 +1,46 @@
+{
+  "center_letter": "C",
+  "outer_letters": [
+    "H",
+    "L",
+    "O",
+    "P",
+    "R",
+    "Y"
+  ],
+  "answers": [
+    "chlorophyll",
+    "chop",
+    "choppy",
+    "clop",
+    "cloy",
+    "coho",
+    "color",
+    "cool",
+    "coolly",
+    "coop",
+    "copy",
+    "coyly",
+    "croc",
+    "crop",
+    "hooch",
+    "loch",
+    "loco",
+    "pooch",
+    "porch",
+    "rococo"
+  ],
+  "pangrams": [
+    "chlorophyll"
+  ],
+  "Beginner": 0,
+  "Good Start": 1,
+  "Moving Up": 4,
+  "Good": 6,
+  "Solid": 11,
+  "Nice": 18,
+  "Great": 29,
+  "Amazing": 36,
+  "Genius": 50,
+  "Queen Bee": 72
+}
