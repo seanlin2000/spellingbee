@@ -1,0 +1,49 @@
+{
+  "center_letter": "N",
+  "outer_letters": [
+    "B",
+    "E",
+    "H",
+    "O",
+    "U",
+    "Y"
+  ],
+  "answers": [
+    "honeybun",
+    "been",
+    "bonbon",
+    "bone",
+    "bonny",
+    "bonobo",
+    "bony",
+    "boon",
+    "bunny",
+    "ebon",
+    "ebony",
+    "enby",
+    "hobnob",
+    "hone",
+    "honey",
+    "honeybee",
+    "nene",
+    "neon",
+    "none",
+    "noob",
+    "noon",
+    "noun",
+    "nubby"
+  ],
+  "pangrams": [
+    "honeybun"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 4,
+  "Good": 6,
+  "Solid": 12,
+  "Nice": 20,
+  "Great": 32,
+  "Amazing": 40,
+  "Genius": 55,
+  "Queen Bee": 79
+}
