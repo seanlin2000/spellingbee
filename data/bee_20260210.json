@@ -1,0 +1,52 @@
+{
+  "center_letter": "H",
+  "outer_letters": [
+    "B",
+    "I",
+    "N",
+    "O",
+    "R",
+    "T"
+  ],
+  "answers": [
+    "inhibitor",
+    "birth",
+    "boho",
+    "boohoo",
+    "booth",
+    "both",
+    "broth",
+    "hint",
+    "hobbit",
+    "hobnob",
+    "hobo",
+    "honor",
+    "hoot",
+    "horn",
+    "horror",
+    "inhibit",
+    "inhibition",
+    "ninth",
+    "north",
+    "rhino",
+    "thin",
+    "thorn",
+    "throb",
+    "tinhorn",
+    "tooth",
+    "troth"
+  ],
+  "pangrams": [
+    "inhibitor"
+  ],
+  "Beginner": 0,
+  "Good Start": 3,
+  "Moving Up": 6,
+  "Good": 10,
+  "Solid": 19,
+  "Nice": 32,
+  "Great": 50,
+  "Amazing": 63,
+  "Genius": 88,
+  "Queen Bee": 126
+}
