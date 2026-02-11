@@ -1,0 +1,53 @@
+{
+  "center_letter": "M",
+  "outer_letters": [
+    "E",
+    "F",
+    "I",
+    "N",
+    "T",
+    "Y"
+  ],
+  "answers": [
+    "femininity",
+    "eminent",
+    "emit",
+    "enemy",
+    "enmity",
+    "feminine",
+    "femme",
+    "imminent",
+    "item",
+    "meet",
+    "meme",
+    "mentee",
+    "mete",
+    "mien",
+    "miff",
+    "mime",
+    "mine",
+    "mini",
+    "minim",
+    "mint",
+    "minty",
+    "mite",
+    "mitt",
+    "mitten",
+    "teem",
+    "tenement",
+    "time"
+  ],
+  "pangrams": [
+    "femininity"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 5,
+  "Good": 8,
+  "Solid": 15,
+  "Nice": 25,
+  "Great": 40,
+  "Amazing": 51,
+  "Genius": 71,
+  "Queen Bee": 101
+}
