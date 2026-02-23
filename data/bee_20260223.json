@@ -1,0 +1,49 @@
+{
+  "center_letter": "H",
+  "outer_letters": [
+    "I",
+    "P",
+    "R",
+    "A",
+    "C",
+    "G"
+  ],
+  "answers": [
+    "graphic",
+    "aargh",
+    "arch",
+    "archaic",
+    "chai",
+    "chair",
+    "chap",
+    "char",
+    "chia",
+    "chic",
+    "chica",
+    "chichi",
+    "chip",
+    "chirp",
+    "graph",
+    "hair",
+    "harp",
+    "high",
+    "highchair",
+    "paragraph",
+    "parch",
+    "pariah",
+    "rich"
+  ],
+  "pangrams": [
+    "graphic"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 5,
+  "Good": 7,
+  "Solid": 14,
+  "Nice": 23,
+  "Great": 37,
+  "Amazing": 46,
+  "Genius": 64,
+  "Queen Bee": 92
+}
