@@ -1,0 +1,47 @@
+{
+  "center_letter": "I",
+  "outer_letters": [
+    "A",
+    "B",
+    "R",
+    "T",
+    "U",
+    "Y"
+  ],
+  "answers": [
+    "tributary",
+    "airy",
+    "arbitrary",
+    "aria",
+    "atria",
+    "bait",
+    "barbarity",
+    "birria",
+    "briar",
+    "briary",
+    "itty",
+    "rabbi",
+    "rabbit",
+    "raita",
+    "rarity",
+    "ribbit",
+    "ribby",
+    "tiara",
+    "tibia",
+    "trait",
+    "tutti"
+  ],
+  "pangrams": [
+    "tributary"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 6,
+  "Good": 9,
+  "Solid": 17,
+  "Nice": 28,
+  "Great": 45,
+  "Amazing": 57,
+  "Genius": 79,
+  "Queen Bee": 113
+}
