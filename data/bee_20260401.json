@@ -1,0 +1,52 @@
+{
+  "center_letter": "M",
+  "outer_letters": [
+    "B",
+    "G",
+    "I",
+    "N",
+    "P",
+    "U"
+  ],
+  "answers": [
+    "bumping",
+    "bumming",
+    "bump",
+    "gimp",
+    "gumming",
+    "imbibing",
+    "imbuing",
+    "impinging",
+    "impugn",
+    "impugning",
+    "miming",
+    "mini",
+    "minim",
+    "minimum",
+    "mining",
+    "mugging",
+    "mung",
+    "muumuu",
+    "nimbi",
+    "numb",
+    "numbing",
+    "pimp",
+    "pimping",
+    "pump",
+    "pumping",
+    "umping"
+  ],
+  "pangrams": [
+    "bumping"
+  ],
+  "Beginner": 0,
+  "Good Start": 3,
+  "Moving Up": 7,
+  "Good": 11,
+  "Solid": 21,
+  "Nice": 36,
+  "Great": 57,
+  "Amazing": 72,
+  "Genius": 100,
+  "Queen Bee": 143
+}
