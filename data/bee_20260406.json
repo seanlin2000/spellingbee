@@ -1,0 +1,49 @@
+{
+  "center_letter": "H",
+  "outer_letters": [
+    "A",
+    "C",
+    "E",
+    "K",
+    "P",
+    "Y"
+  ],
+  "answers": [
+    "paycheck",
+    "ache",
+    "achy",
+    "cache",
+    "chap",
+    "cheap",
+    "check",
+    "cheek",
+    "cheeky",
+    "cheep",
+    "each",
+    "hack",
+    "haka",
+    "hake",
+    "happy",
+    "heap",
+    "heck",
+    "hype",
+    "peach",
+    "peachy",
+    "yeah",
+    "yecch",
+    "yech"
+  ],
+  "pangrams": [
+    "paycheck"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 4,
+  "Good": 6,
+  "Solid": 12,
+  "Nice": 20,
+  "Great": 32,
+  "Amazing": 40,
+  "Genius": 55,
+  "Queen Bee": 79
+}
