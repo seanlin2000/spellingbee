@@ -1,0 +1,51 @@
+{
+  "center_letter": "G",
+  "outer_letters": [
+    "H",
+    "O",
+    "R",
+    "T",
+    "U",
+    "W"
+  ],
+  "answers": [
+    "outgrowth",
+    "wrought",
+    "goth",
+    "gout",
+    "grog",
+    "grotto",
+    "grout",
+    "grow",
+    "growth",
+    "guru",
+    "ought",
+    "outgo",
+    "outgrow",
+    "outthought",
+    "rotgut",
+    "rough",
+    "thorough",
+    "though",
+    "thought",
+    "through",
+    "throughout",
+    "thug",
+    "tough",
+    "trough"
+  ],
+  "pangrams": [
+    "outgrowth",
+    "wrought"
+  ],
+  "Beginner": 0,
+  "Good Start": 3,
+  "Moving Up": 7,
+  "Good": 11,
+  "Solid": 21,
+  "Nice": 35,
+  "Great": 56,
+  "Amazing": 70,
+  "Genius": 98,
+  "Queen Bee": 140
+}
