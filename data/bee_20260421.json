@@ -1,0 +1,44 @@
+{
+  "center_letter": "B",
+  "outer_letters": [
+    "C",
+    "I",
+    "K",
+    "O",
+    "R",
+    "W"
+  ],
+  "answers": [
+    "brickwork",
+    "bocci",
+    "bock",
+    "boob",
+    "booboo",
+    "book",
+    "bookwork",
+    "boor",
+    "boric",
+    "borrow",
+    "bowwow",
+    "brick",
+    "brio",
+    "brook",
+    "brow",
+    "cookbook",
+    "crib",
+    "workbook"
+  ],
+  "pangrams": [
+    "brickwork"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 4,
+  "Good": 7,
+  "Solid": 13,
+  "Nice": 21,
+  "Great": 34,
+  "Amazing": 43,
+  "Genius": 59,
+  "Queen Bee": 85
+}
