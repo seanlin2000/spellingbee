@@ -1,0 +1,52 @@
+{
+  "center_letter": "N",
+  "outer_letters": [
+    "B",
+    "C",
+    "E",
+    "I",
+    "L",
+    "V"
+  ],
+  "answers": [
+    "invincible",
+    "vincible",
+    "beeline",
+    "been",
+    "blin",
+    "blini",
+    "clinic",
+    "eleven",
+    "enliven",
+    "even",
+    "evince",
+    "incline",
+    "innie",
+    "lenience",
+    "lien",
+    "line",
+    "linen",
+    "liven",
+    "nene",
+    "nibble",
+    "nice",
+    "niece",
+    "nine",
+    "vein",
+    "vine"
+  ],
+  "pangrams": [
+    "invincible",
+    "vincible"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 6,
+  "Good": 10,
+  "Solid": 18,
+  "Nice": 30,
+  "Great": 48,
+  "Amazing": 60,
+  "Genius": 84,
+  "Queen Bee": 120
+}
