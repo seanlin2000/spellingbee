@@ -1,0 +1,49 @@
+{
+  "center_letter": "Z",
+  "outer_letters": [
+    "A",
+    "E",
+    "G",
+    "I",
+    "L",
+    "N"
+  ],
+  "answers": [
+    "legalizing",
+    "agaze",
+    "azalea",
+    "elegize",
+    "elegizing",
+    "gaze",
+    "gazelle",
+    "gazing",
+    "geez",
+    "glaze",
+    "glazing",
+    "laze",
+    "lazing",
+    "legalize",
+    "zagging",
+    "zeal",
+    "zigging",
+    "zigzag",
+    "zigzagging",
+    "zine",
+    "zing",
+    "zinging",
+    "zinnia"
+  ],
+  "pangrams": [
+    "legalizing"
+  ],
+  "Beginner": 0,
+  "Good Start": 3,
+  "Moving Up": 7,
+  "Good": 11,
+  "Solid": 20,
+  "Nice": 33,
+  "Great": 53,
+  "Amazing": 66,
+  "Genius": 92,
+  "Queen Bee": 132
+}
