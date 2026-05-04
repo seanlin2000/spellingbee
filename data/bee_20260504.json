@@ -1,0 +1,53 @@
+{
+  "center_letter": "L",
+  "outer_letters": [
+    "F",
+    "G",
+    "H",
+    "I",
+    "T",
+    "Y"
+  ],
+  "answers": [
+    "flighty",
+    "fill",
+    "filly",
+    "filth",
+    "filthily",
+    "filthy",
+    "fitly",
+    "flight",
+    "flit",
+    "giggly",
+    "gill",
+    "gilt",
+    "highlight",
+    "highly",
+    "hill",
+    "hilly",
+    "hilt",
+    "illy",
+    "lift",
+    "light",
+    "lightly",
+    "lilt",
+    "lily",
+    "tightly",
+    "till",
+    "tilt",
+    "tilth"
+  ],
+  "pangrams": [
+    "flighty"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 6,
+  "Good": 9,
+  "Solid": 17,
+  "Nice": 28,
+  "Great": 44,
+  "Amazing": 56,
+  "Genius": 78,
+  "Queen Bee": 111
+}
