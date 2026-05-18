@@ -1,0 +1,42 @@
+{
+  "center_letter": "P",
+  "outer_letters": [
+    "A",
+    "C",
+    "H",
+    "T",
+    "U",
+    "Z"
+  ],
+  "answers": [
+    "chutzpah",
+    "captcha",
+    "catchup",
+    "chap",
+    "chuppah",
+    "cuppa",
+    "cutup",
+    "pact",
+    "papa",
+    "patch",
+    "path",
+    "phat",
+    "pupa",
+    "putt",
+    "putz",
+    "tapa"
+  ],
+  "pangrams": [
+    "chutzpah"
+  ],
+  "Beginner": 0,
+  "Good Start": 1,
+  "Moving Up": 3,
+  "Good": 5,
+  "Solid": 9,
+  "Nice": 15,
+  "Great": 24,
+  "Amazing": 30,
+  "Genius": 42,
+  "Queen Bee": 60
+}
