@@ -1,0 +1,52 @@
+{
+  "center_letter": "K",
+  "outer_letters": [
+    "G",
+    "I",
+    "N",
+    "O",
+    "T",
+    "U"
+  ],
+  "answers": [
+    "unknotting",
+    "ginkgo",
+    "gunk",
+    "inking",
+    "king",
+    "kinging",
+    "kink",
+    "kinking",
+    "kiting",
+    "knit",
+    "knitting",
+    "knot",
+    "knotting",
+    "kook",
+    "nook",
+    "nuking",
+    "oink",
+    "oinking",
+    "tiki",
+    "toking",
+    "took",
+    "unkink",
+    "unkinking",
+    "unknit",
+    "unknitting",
+    "unknot"
+  ],
+  "pangrams": [
+    "unknotting"
+  ],
+  "Beginner": 0,
+  "Good Start": 3,
+  "Moving Up": 7,
+  "Good": 10,
+  "Solid": 20,
+  "Nice": 33,
+  "Great": 52,
+  "Amazing": 66,
+  "Genius": 92,
+  "Queen Bee": 131
+}
