@@ -1,0 +1,53 @@
+{
+  "center_letter": "O",
+  "outer_letters": [
+    "E",
+    "F",
+    "I",
+    "L",
+    "N",
+    "X"
+  ],
+  "answers": [
+    "flexion",
+    "felon",
+    "floe",
+    "foil",
+    "folio",
+    "fool",
+    "info",
+    "leonine",
+    "lion",
+    "loin",
+    "loll",
+    "lone",
+    "loon",
+    "loonie",
+    "neon",
+    "noel",
+    "none",
+    "nonillion",
+    "noon",
+    "offline",
+    "oleo",
+    "olio",
+    "ollie",
+    "onion",
+    "online",
+    "oxen",
+    "xenon"
+  ],
+  "pangrams": [
+    "flexion"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 5,
+  "Good": 7,
+  "Solid": 14,
+  "Nice": 23,
+  "Great": 36,
+  "Amazing": 45,
+  "Genius": 63,
+  "Queen Bee": 90
+}
