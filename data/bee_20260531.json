@@ -1,0 +1,51 @@
+{
+  "center_letter": "C",
+  "outer_letters": [
+    "D",
+    "G",
+    "H",
+    "I",
+    "L",
+    "O"
+  ],
+  "answers": [
+    "godchild",
+    "chic",
+    "chichi",
+    "child",
+    "childhood",
+    "chili",
+    "chill",
+    "chocoholic",
+    "cichlid",
+    "clod",
+    "clog",
+    "cocci",
+    "codicil",
+    "coho",
+    "coil",
+    "cold",
+    "colic",
+    "colloid",
+    "cool",
+    "hooch",
+    "illogic",
+    "loch",
+    "loci",
+    "loco",
+    "logic"
+  ],
+  "pangrams": [
+    "godchild"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 6,
+  "Good": 9,
+  "Solid": 17,
+  "Nice": 28,
+  "Great": 45,
+  "Amazing": 57,
+  "Genius": 79,
+  "Queen Bee": 113
+}
