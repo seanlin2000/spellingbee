@@ -1,0 +1,49 @@
+{
+  "center_letter": "A",
+  "outer_letters": [
+    "D",
+    "I",
+    "P",
+    "T",
+    "V",
+    "Y"
+  ],
+  "answers": [
+    "adaptivity",
+    "vapidity",
+    "adapt",
+    "avid",
+    "avidity",
+    "daddy",
+    "data",
+    "diva",
+    "dyad",
+    "paddy",
+    "paid",
+    "papa",
+    "papaya",
+    "pappy",
+    "patty",
+    "payday",
+    "pita",
+    "pitapat",
+    "tapa",
+    "tatty",
+    "vapid",
+    "yappy"
+  ],
+  "pangrams": [
+    "adaptivity",
+    "vapidity"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 5,
+  "Good": 8,
+  "Solid": 16,
+  "Nice": 27,
+  "Great": 42,
+  "Amazing": 53,
+  "Genius": 74,
+  "Queen Bee": 106
+}
