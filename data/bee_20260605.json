@@ -1,0 +1,53 @@
+{
+  "center_letter": "F",
+  "outer_letters": [
+    "C",
+    "G",
+    "I",
+    "N",
+    "O",
+    "R"
+  ],
+  "answers": [
+    "forcing",
+    "coffin",
+    "coffining",
+    "coif",
+    "coiffing",
+    "confining",
+    "fifing",
+    "fining",
+    "firing",
+    "foci",
+    "fogging",
+    "forging",
+    "forgo",
+    "forgoing",
+    "fringing",
+    "frog",
+    "goof",
+    "goofing",
+    "griffin",
+    "griffon",
+    "info",
+    "infringing",
+    "offing",
+    "riff",
+    "riffing",
+    "roof",
+    "roofing"
+  ],
+  "pangrams": [
+    "forcing"
+  ],
+  "Beginner": 0,
+  "Good Start": 3,
+  "Moving Up": 8,
+  "Good": 13,
+  "Solid": 24,
+  "Nice": 39,
+  "Great": 63,
+  "Amazing": 79,
+  "Genius": 110,
+  "Queen Bee": 157
+}
