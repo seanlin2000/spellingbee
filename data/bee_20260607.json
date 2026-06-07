@@ -1,0 +1,46 @@
+{
+  "center_letter": "C",
+  "outer_letters": [
+    "A",
+    "D",
+    "I",
+    "T",
+    "U",
+    "V"
+  ],
+  "answers": [
+    "viaduct",
+    "acacia",
+    "acai",
+    "acid",
+    "acidic",
+    "addict",
+    "adduct",
+    "attic",
+    "cacti",
+    "cava",
+    "cicada",
+    "civic",
+    "dicta",
+    "didact",
+    "didactic",
+    "ducat",
+    "duct",
+    "tacit",
+    "tact",
+    "tactic"
+  ],
+  "pangrams": [
+    "viaduct"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 5,
+  "Good": 8,
+  "Solid": 15,
+  "Nice": 25,
+  "Great": 40,
+  "Amazing": 50,
+  "Genius": 69,
+  "Queen Bee": 99
+}
