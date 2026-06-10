@@ -1,0 +1,51 @@
+{
+  "center_letter": "H",
+  "outer_letters": [
+    "C",
+    "G",
+    "I",
+    "M",
+    "N",
+    "O"
+  ],
+  "answers": [
+    "mooching",
+    "chic",
+    "chichi",
+    "chignon",
+    "chiming",
+    "chin",
+    "chinning",
+    "chino",
+    "cinch",
+    "cinching",
+    "coho",
+    "conch",
+    "gnocchi",
+    "high",
+    "hinging",
+    "hogging",
+    "homing",
+    "honcho",
+    "honing",
+    "hooch",
+    "inch",
+    "inching",
+    "mochi",
+    "mooch",
+    "nigh"
+  ],
+  "pangrams": [
+    "mooching"
+  ],
+  "Beginner": 0,
+  "Good Start": 3,
+  "Moving Up": 7,
+  "Good": 11,
+  "Solid": 20,
+  "Nice": 33,
+  "Great": 53,
+  "Amazing": 67,
+  "Genius": 93,
+  "Queen Bee": 133
+}
