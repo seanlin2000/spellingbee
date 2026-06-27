@@ -1,0 +1,50 @@
+{
+  "center_letter": "W",
+  "outer_letters": [
+    "B",
+    "E",
+    "I",
+    "L",
+    "O",
+    "P"
+  ],
+  "answers": [
+    "blowpipe",
+    "bellow",
+    "below",
+    "billow",
+    "blew",
+    "blow",
+    "bowel",
+    "bowl",
+    "bowwow",
+    "elbow",
+    "peewee",
+    "pewee",
+    "pillow",
+    "plow",
+    "powwow",
+    "weep",
+    "weepie",
+    "well",
+    "wile",
+    "will",
+    "willow",
+    "wipe",
+    "wobble",
+    "wool"
+  ],
+  "pangrams": [
+    "blowpipe"
+  ],
+  "Beginner": 0,
+  "Good Start": 2,
+  "Moving Up": 5,
+  "Good": 8,
+  "Solid": 15,
+  "Nice": 25,
+  "Great": 40,
+  "Amazing": 50,
+  "Genius": 69,
+  "Queen Bee": 99
+}
